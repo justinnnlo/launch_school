@@ -1,36 +1,39 @@
-p "What is your first name?" # Print a message before the gets — otherwise the user will be asked to input without context
+# 1. Write a program that asks the user to type in their name and then prints out a greeting message with their name included.
+
+puts "What is your first name?"
 first_name = gets.chomp
-p "What is your last name?"
+puts "What is your last name?"
 last_name = gets.chomp
-p "Hello, #{first_name} #{last_name}!"
-puts ""
-p "What is your age, #{first_name}?"
-age = gets.chomp.to_i # Needs to be converted to integer as gets treats the input as a string
-puts ""
-age+=10
-p "In 10 years you will be: #{age} years old"
-age+=10
-p "In 20 years you will be: #{age} years old"
-age+=10
-p "In 30 years you will be: #{age} years old"
-age+=10
-p "In 40 years you will be: #{age} years old"
-puts ""
-10.times { puts first_name }
+name = first_name + " " + last_name
+puts "Hello, #{name}!"
 
-# Problem 5: what does each program print?
+# 2. Ask a user how old they are and then tells them how old they will be in 10, 20, 30 and 40 years.
 
-# Block 1
-x = 0
+puts "What's your age?"
+age = gets.chomp.to_i
+puts "In 10 years you'll be #{age+10}"
+puts "In 20 years you'll be #{age+20}"
+puts "In 30 years you'll be #{age+30}"
+puts "In 40 years you'll be #{age+40}"
+
+# 3. Print the name of the user 10 times. You must do this without explicitly writing the puts method 10 times in a row
+
+puts "===\nFirst trial\n==="
+10.times { puts "#{name}"}
+puts "===\nSecond trial\n==="
+(0...10).each { puts "#{name}" }
+
+# 4. What's the result of the programs below?
+
+x = 0 
 3.times do
-  x += 1
+  x += 1 # Variables defined in the outer scope are available in the inner scope
 end
-puts x
+puts x # print 3, return 0
 
-# Block 2: error because x is inside the scope of the block (unless block 1 is run before, which would return 3 as above) 
 y = 0
 3.times do
   y += 1
   x = y
 end
-puts x
+puts x # error: a variable defined in the inner scope is NOT accessible in the outer scope

@@ -1,46 +1,58 @@
-# Problem 1: contain a method called `greeting` that takes a `name` as its parameter and returns a string
+# 1. Write a program that prints a greeting message. This program should contain a method called greeting that takes a name as its parameter and returns a string.
 
 def greeting(name)
-  return "Hello, #{name}!"
+  p "Hello, #{name}!"
 end
 
-p greeting("Jose")
+greeting("Jose")
 
-# Problem 2: what do these expressions evaluate to?
-x = 2 # 2, because variable assignments return the value assigned to the variable
+# 2. What do the following expressions evaluate to?
 
-puts x = 2 # nil, because puts always *returns* nil
+x = 2 # 2, because a method assignment returns the evaluated expression
 
-p name = "Joe" # Jose, because p returns the value of the evaluated expression
+puts x = 2 # prints 2 because that's the value returned by x = 2, a newline, and returns nil
 
-four = "four" # "four", because variable assignments return the value assigned to the variable
+p name = "Joe" # Both prints and returns "Joe"
 
-print something = "nothing" # nil, because print always *returns* nil (but without a newline before the returned value, unlike puts)
+four = "four" # Returns "four"
 
-# Problem 3: Write a program that includes a method called `multiply` that takes two arguments and returns the product of the two numbers.
+print something = "nothing" # Prints on the screen "nothing", but returns nil
 
-def multiply (a, b)
-  return a * b
+# 3. Write a program that includes a method called multiply that takes two arguments and returns the product of the two numbers.
+
+def multiply(a, b)
+  a * b
 end
 
-puts multiply(4, 2)
+p multiply(3, 4)
 
-# Problem 4: what value is returned from this method call?
+# 4. What will the following code print to the screen?
 
 def scream(words)
   words = words + "!!!!"
-  return
+  return # It prints and returns nothing because the explicit return stops the execution of the method 
   puts words
 end
 
-scream("Yippeee") # nil, because it's returning nothing. Thus, it does not print any words to the screen.
+scream("Yippeee") 
 
-# Problem 5: how can it both print its evalued expression to the screen and not return nil? How can it print to screen but not return?
+# 5. Edit the method definition in exercise #4 so that it does print words on the screen. What does it return now?
 
 def scream(words)
   words = words + "!!!!"
-  # return — delete return so that it returns the next line
-  p words #use p instead of puts to return words. Use puts or print to print to screen but return nil.
+  puts words # prints Yippeee!!!! but returns nil
 end
 
-scream("Yippeee") # output to screen AND return words
+scream("Yippeee") 
+
+# 6. What does the following error message tell you?
+
+=begin
+
+Conclusion: the user passed one instead of 2 arguments to the method
+
+ArgumentError: wrong number of arguments (1 for 2)
+  from (irb):1:in `calculate_product'
+  from (irb):4
+  from /Users/username/.rvm/rubies/ruby-2.5.3/bin/irb:12:in `<main>'
+=end

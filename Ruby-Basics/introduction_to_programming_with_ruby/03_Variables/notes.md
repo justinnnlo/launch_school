@@ -53,3 +53,35 @@ end
 puts a
 puts b            # b is inaccessible here, in the outer scope?
 ~~~
+
+But here it can be accessed in the outer scope because `for` is part of Tuby language and **not a method invocation**.
+~~~
+arr = [1, 2, 3]
+
+for i in arr do
+  a = 5      # a is initialized here
+end
+
+puts a       # is it accessible here?
+~~~
+
+# Types of variables
+
+1. Constants
+  - Defined by all-caps: CONSTANT = "This is a constant"
+  - Values should not be changed, but can (though will pop a warning message)
+  - Global scope
+2. Global variables
+  - Defined by starting with a $: $global_variable = "This is a global variable"
+  - Global scope
+3. Class variables
+  - Defined by starting with @@: @@class_variable = "This is a class variable"
+  - Need to be initialized in the class level and outside of any method definitions
+  - Can be accessed by the class itself and instances of the class its defined in
+4. Instance variables
+  - Defined by starting its name with @: e.g. @instance_variable = "This is an instance"
+  - Is available throughout the current instance of the class
+  - Can cross some — but not all — scope boundaries. TBC in OOP
+5. Local variables
+  - Must start with an alphabetic character and not be fully capitalized
+  - Constraint by their particular scope — a case-by-case basis
