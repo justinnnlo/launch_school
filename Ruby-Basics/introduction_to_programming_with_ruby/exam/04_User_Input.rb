@@ -88,6 +88,16 @@ puts "something" if answer.downcase == "y"
 
 # 5. Write a program that prints 'Launch School is the best!' repeatedly until a certain number of lines have been printed. The program should obtain the number of lines from the user, and should insist that at least 3 lines are printed.
 
+# Gist: structuring code to optimize for readability
+
+=begin
+TAKEAWAYS
+
+1. More descriptive variable names
+2. Breaking the program in 2 and by the order of their sequence - it's much easier to read than a single loop containing the whole process
+3. Using a single variable: define in outer scope and then use as counter by reassigning the variable with each loop
+=end
+
 # Method 1: slightly more efficient in terms of lines of code but a bit less readable
 
 loop do
@@ -120,17 +130,12 @@ while number_of_lines > 0
   number_of_lines -= 1
 end
 
-=begin
-TAKEAWAYS
-
-1. More descriptive variable names
-2. Breaking the program in 2 and by the order of their sequence - it's much easier to read than a single loop containing the whole process
-3. Using a single variable: define in outer scope and then use as counter by reassigning the variable with each loop
-=end
 
 
 
 # 6.Write a program that displays a welcome message, but only after the user enters the correct password, where the password is a string that is defined as a constant in your program. Keep asking for the password until the user enters the correct password.
+
+# Gist: input comparison with strings, and applying control flow with conditionals
 
 PASSWORD = "hello"
 
@@ -148,6 +153,8 @@ puts "Welcome!"
 
   
 # 7. You should modify the program so it also requires a user name. The program should solicit both the user name and the password, then validate both, and issue a generic error message if one or both are incorrect; the error message should not tell the user which item is incorrect.
+
+# Gist: comparison and control flow in a loop with 2 variables
 
 USERNAME = "14jdelap"
 PASSWORD = "hello"
@@ -167,6 +174,8 @@ puts "Welcome!"
 
 
 # 8. Write a program that obtains two Integers from the user, then prints the results of dividing the first by the second. The second number must not be 0, and both numbers should be validated. This method returns true if the input string can be converted to an Integer and back to a string without loss of information, false otherwise. It's not a perfect solution in that some inputs that are otherwise valid (such as 003) will fail, but it is sufficient for this exercise.
+
+# Gist: string to integer conversion, method calling witin string interpolation (possible, including chaining)
 
 def valid_number?(number_string)
   number_string.to_i.to_s == number_string
@@ -195,15 +204,13 @@ loop do
   end
 end
 
-result = (numerator.to_i/denominator.to_i)
-
-# result needed because string interpolation cannot handle operations
-
-puts "#{numerator} / #{denominator} is #{result}"
+puts "#{numerator} / #{denominator} is #{numerator.to_i/denominator.to_i}"
 
 
 
 # 9. Modify the program so it repeats itself after each input/print iteration, asking for a new number each time through. The program should keep running until the user enters q or Q.
+
+# Gist: string to integer conversion
 
 # Initial trial - with significant problems
 
@@ -256,6 +263,8 @@ end
 
 
 # 10. Write a program that requests two integers from the user, adds them together, and then displays the result. Furthermore, insist that one of the integers be positive, and one negative; however, the order in which the two integers are entered does not matter. Do not check for the positive/negative requirement until both integers are entered, and start over if the requirement is not met.
+
+# Gist: loops within methods, calling loops within methods
 
 # My original version: 3 loops and an if statement with control flow (break if successful).
 
