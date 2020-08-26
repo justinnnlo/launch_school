@@ -42,3 +42,15 @@ puts count_occurrences(vehicles)
 
 # 5. Write a method that takes one argument, a string, and returns a new string with the words in reverse order.
 
+def reverse_words(string)
+  split_sentence = string.split
+  reversed_words = []
+  split_sentence.each { |word| reversed_words.unshift(word) }
+  split_sentence.inject { |word| acc }
+  reversed_words.join(" ")
+end
+
+
+# 6. Write a method that takes one argument, a string containing one or more words, and returns the given string with words that contain five or more characters reversed. Each string will consist of only letters and spaces. Spaces should be included only when more than one word is present.
+
+def 
