@@ -9,7 +9,7 @@ repeat("Hello!", 5)
 # 2. Write a method that takes one integer argument, which may be positive, negative, or zero. This method returns true if the number's absolute value is odd. You may assume that the argument is a valid integer value.
 
 def is_odd?(integer)
-    return integer.abs % 2 == 1
+  return integer.abs % 2 == 1
 end
 
 puts is_odd?(5)
@@ -50,7 +50,7 @@ def reverse_words(string)
   reversed_words.join(" ")
 end
 
+p reverse_words("Hello!")
 
 # 6. Write a method that takes one argument, a string containing one or more words, and returns the given string with words that contain five or more characters reversed. Each string will consist of only letters and spaces. Spaces should be included only when more than one word is present.
 
-def 
