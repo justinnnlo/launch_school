@@ -1,0 +1,21 @@
+welcome: "Welcome to the Calculator!"
+name: "What's your name?"
+incorrect_name: 'Make sure you use a valid name.'
+greeting_with_name: 'Hi, #{name}!'
+first_number: "What's the first number?"
+second_number: "What's the second number?"
+wrong_number: "It's wrong..."
+operator_prompt: What operations would you like to perform?
+  
+  1. Add
+  
+  2. Substract
+  
+  3. Multiply
+  
+  4. Divide
+wrong_operator_input: 'You must choose 1, 2, 3 or 4'
+operation_to_message: "#{operation_to_message(operator)} the 2 numbers..."
+result: "The result is #{result}"
+continue_or_end: 'Do you want to perform another calculation? (Y to calculate again.)'
+goodbye: 'Thanks for using the calculator!'

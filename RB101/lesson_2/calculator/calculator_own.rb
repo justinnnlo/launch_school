@@ -45,7 +45,7 @@ def number_input
       break num                # break otherwise returns nil
     end
 
-    puts 'Please enter a valid integer'
+    prompt('Please enter a valid integer')
   end
 end
 
@@ -57,15 +57,34 @@ def integer_validation(string)
   # By comparing strings we problems of string-to-integer conversion, which always equals 0
 end
 
+def prompt(string)
+  puts("=> #{string}")
+end
+
 def operations
-  puts 'What\'s your first number?'
+  
+  prompt("Welcome to calculator!")
+  prompt("What's your name?")
+  name = gets.chomp
+  prompt("Hi, #{name}!")
+  
+  prompt ('What\'s your first number?')
   num1 = number_input
 
-  puts 'What\'s your second number?'
+  prompt ('What\'s your second number?')
   num2 = number_input
 
   loop do
-    puts 'Do you want to add, subtract, multiply, or divide the 2 numbers?'
+    operator_prompt = <<-MSG
+    Do you want to 
+    1. add, 
+    2. subtract, 
+    3. multiply, or 
+    4. divide? 
+    MSG
+
+    prompt(operator_prompt)
+
     operation = gets.chomp.downcase
 
     case operation
@@ -80,7 +99,7 @@ def operations
 
       raise 'The denominator cannot be 0. Please try again.'
     else
-      puts "The operation was invalid. Please input 'add', 'subtract', 'multiply', or 'divide'.\n\n"
+      prompt ("The operation was invalid. Please input 'add', 'subtract', 'multiply', or 'divide'.\n\n")
     end
   end
 end
