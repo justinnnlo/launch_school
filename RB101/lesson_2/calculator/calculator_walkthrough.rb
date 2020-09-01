@@ -1,15 +1,13 @@
-# Ask the user for 2 numbers
-# Ask the user for an operation to perform
-# Perform the operation on the 2 numbers
-# Output the result
-
-# Note: this is a simpler approach to the calculator I previously made
-
 require 'byebug'
 require 'yaml'
-MESSAGES = YAML.load_file("calculator_messages.yaml")
-TEST = YAML.load('Hi, #{name}!')
-byebug
+
+LANGUAGE = "es"
+MESSAGES = YAML.load_file('calculator_messages.yml')
+
+def messages(message, lang=LANGUAGE)    # Instead of lang = "en"
+  MESSAGES[lang][message]
+end
+
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
@@ -17,10 +15,8 @@ end
 def valid_number?(num)
   numbers = %w[0 1 2 3 4 5 6 7 8 9 .]
 
-  num.split('').all? { |ele| numbers.include?(ele) } ? true : false
-
-  # By comparing strings we problems of string-to-integer conversion, which always equals 0
-  # EDGE case: "5."
+  (num.split('').all? { |ele| numbers.include?(ele) } and num.empty? == false) ? true : false
+  # EDGE cases: "5.", "1.", etc.
 end
 
 def int_or_float?(num)
@@ -31,74 +27,66 @@ end
 def operation_to_message(op)
   result = case op
            when "1"
-            "Adding"
+            messages("adding")
            when "2"
-             "Subtracting"
+             messages("subtracting")
            when "3"
-             "Multipying"
+             messages("multipying")
            when "4"
-             "Dividing"
+             messages("dividing")
            end
-
-  puts "Random code"
-  result
 end
 
-#byebug
-prompt(MESSAGES["welcome"])
-prompt(MESSAGES["name"])
+prompt messages("welcome")
+prompt messages("name")
+
 name = ''
 loop do
   name = Kernel.gets().chomp()
-
-  if name.empty?()
-    prompt(MESSAGES["incorrect_name"])
-  else
-    break
-  end
+  break unless name.empty?()
+  prompt messages("incorrect_name")
 end
 
-prompt(TEST["greeting_with_name"])
+prompt format(messages("greeting_with_name"), name: name)
 
 loop do
   number1 = ''
   loop do
-    prompt(MESSAGES[first_number])
+    prompt messages("first_number")
     number1 = Kernel.gets().chomp()
+
     if valid_number?(number1)
       number1 = int_or_float?(number1)
       break
     else
-      prompt(MESSAGES[wrong_number])
+      prompt messages("wrong_number")
     end
   end
 
   number2 = ''
   loop do
-    prompt(MESSAGES[second_number])
+    prompt messages("second_number")
     number2 = Kernel.gets().chomp()
+    
     if valid_number?(number2)
       number2 = int_or_float?(number2)
       break
     else
-      prompt(MESSAGES[wrong_number])
+      prompt messages("wrong_number")
     end
   end
 
-  prompt(MESSAGES["operator_prompt"])
+  prompt messages("operator_prompt")
 
   operator = nil
   loop do
     operator = Kernel.gets().chomp()
 
-    if %w[1 2 3 4].include?(operator)
-      break
-    else
-      prompt(MESSAGES["wrong_operator_input"])
-    end
+    break if %w[1 2 3 4].include?(operator)
+    prompt messages("wrong_operator_input")
   end
 
-  prompt(MESSAGES["operation_to_message"])
+  prompt format(messages("operation_to_message"), message: operation_to_message(operator))
 
   result = case operator
            when "1"
@@ -108,17 +96,21 @@ loop do
            when "3"
              number1 * number2
            when "4"
-             number1 / number2
+             if number2.zero?
+               messages("zero_denominator")
+              else
+                number1 / number2
+              end
            else
              raise "Please restart and enter the input for a valid operation."
            end
 
-  prompt(MESSAGES["result"])
+  prompt format(messages("result"), result: result)
   # result's valid because ifs are **within the program's normal execution**
 
-  prompt(MESSAGES["continue_or_end"])
+  prompt messages("continue_or_end")
   answer = Kernel.gets().chomp()
-  break unless answer.downcase.start_with?('y')
+  break unless (answer.downcase.start_with?('y') if LANGUAGE == "en") or (answer.downcase.start_with?('s') if LANGUAGE == "es")
 end
 
-prompt(MESSAGES["goodbye"])
+prompt messages("goodbye")

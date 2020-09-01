@@ -1,5 +1,4 @@
 require 'yaml'
 
-name = "Jose"
-TEST = YAML.load("Hi, #{name}!")
-puts  TEST
+puts yml = YAML.load_file("test.yml")
+puts "#{yml[name]} is great!"

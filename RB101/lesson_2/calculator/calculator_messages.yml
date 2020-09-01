@@ -1,0 +1,55 @@
+en:
+    adding:               "Adding"
+    subtracting:          "Subtracting"
+    multiplying:          "Multiplying"
+    dividing:             "Dividing"
+    welcome:              "Welcome to the Calculator!"
+    name:                 "What's your name?"
+    incorrect_name:       'Make sure you use a valid name.'
+    greeting_with_name:   Hi, %{name}!
+    first_number:         "What's the first number?"
+    second_number:        "What's the second number?"
+    wrong_number:         "It's wrong..."
+    operator_prompt:      What operations would you like to perform?
+      
+                          1. Add
+                          
+                          2. Substract
+                          
+                          3. Multiply
+                          
+                          4. Divide
+    wrong_operator_input: 'You must choose 1, 2, 3 or 4'
+    zero_denominator:     "indefinite because 0 is the denominator."
+    operation_to_message: "%{message} the 2 numbers..."
+    result:               "The result is %{result}"
+    continue_or_end:      'Do you want to perform another calculation? (Y to calculate again.)'
+    goodbye:              'Thanks for using the calculator!'
+
+es:
+  adding:                 "Sumando"
+  subtracting:            "Restando"
+  multiplying:            "Multiplicando"
+  dividing:               "Dividiendo"
+  welcome:                "Bienvenido a la calculadora!"
+  name:                   "Cuál es tu nombre?"
+  incorrect_name:         'Asegúrate de usar un nombre válido.'
+  greeting_with_name:     "Hola, %{name}!"
+  first_number:           "Cuál es tu primer número?"
+  second_number:          "Cuál es tu segundo número?"
+  wrong_number:           "Está mal..."
+  operator_prompt:        Qué operación quieres hacer?
+    
+                          1. Sumar
+                          
+                          2. Restar
+                          
+                          3. Multiplicar
+                          
+                          4. Dividir
+  wrong_operator_input:   'Tienes que escoger entre 1, 2, 3 or 4'
+  zero_denominator:       "indefinido porque 0 es el denominador."
+  operation_to_message:   "%{message} los dos números..."
+  result:                 "El resultado es %{result}"
+  continue_or_end:        'Quieres hacer otra calculación? (S para calcular de nuevo.)'
+  goodbye:                'Gracias por usar la calculadora!'

@@ -1,0 +1,33 @@
+en:
+  welcome:                      Welcome to the loan calculator!
+  ask_name:                     What's your name?
+  incorrect_name:               Please enter a correct name
+  greeting_name:                Hi, %{name}!
+  purpose: |
+                                I'll help you find what you should pay as monthly loan payments.
+                                   Please take in mind that this only works for a single loan at a time.
+                                   You'll need to give me a few numbers — please input them when I ask you for each.
+  amount_loan:                  What's the total amount you owe in this loan? 
+  incorrect_number:             You entered an incorrect number, please try again.
+  annual_or_monthly: |
+                                Now we need the interest on your loan. 
+                                   Do you have it as annual ("A") or monthly ("M") interest?
+  incorrect_annual_or_monthly: | 
+                                We didn't get a valid option. 
+                                   Please press "A" if you have an annual interest rate or an "M" if you have a monthly interest rate.
+  interest_rate: |
+                                What's your %{annual_or_monthly} interest rate? Use either
+                                   - Percentages (e.g. 6%) or
+                                   - Decimals (0.06) — note that entering 3 means 300%!
+  duration_months:              How many months does your loan last?
+  confirm_details: |
+                                To make sure we got everything right, you told us that you have a:
+                                   - Loan of $%{amount_loan}
+                                   - %{interest_monthly} monthly interest rate, which is equivalent to a %{interest_annual} annual interest
+                                   - %{duration_months} months of duration
+                                   If something is wrong: press "N" to input the details again. 
+                                   Otherwise press enter to calculate.
+  monthly_payment:                Your monthly payment is $%{payment_monthly}.
+  repeat?:                      Press "Y" to do another calculation.
+                                   To exit the program press enter.
+  goodbye:                      Goodbye, %{name}!
