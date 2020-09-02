@@ -1,5 +1,4 @@
 require "yaml"
-require "byebug"
 
 LANGUAGE = "en"
 MESSAGES = YAML.load_file("messages.yml")
@@ -14,14 +13,11 @@ def messages(message, lang=LANGUAGE)
 end
 
 def valid_number?(num)
-  # Return true if the string is i) not empty, ii) does not start with "%", and
-  # iii) only has characters included in NUMBERS
   !num.empty? && !num.start_with?("%") &&
     num.split("").all? { |digit| NUMBERS.include?(digit) }
 end
 
 def correct_decimal(decimal)
-  # Add "0" to the string decimal if it starts with "."
   "0" + decimal
 end
 
@@ -99,10 +95,16 @@ def new_calculation?
   repeat = gets.chomp.downcase
 end
 
+def clean_terminal
+  system("clear") || system("cls")
+end
+
 duration_months = ""
 amount_loan = ""
 annual_or_monthly = ""
 interest_monthly = ""
+
+clean_terminal
 
 prompt messages("welcome")
 prompt messages("ask_name")
@@ -136,6 +138,7 @@ loop do
   prompt format(messages("monthly_payment"), payment_monthly: payment_monthly)
 
   break if new_calculation? != "y"
+  clean_terminal
 end
 
 prompt format(messages("goodbye"), name: name)
