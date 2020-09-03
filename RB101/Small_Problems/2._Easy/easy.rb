@@ -19,8 +19,9 @@ puts is_odd?(-9)
 # 3. Write a method that takes one argument, a positive integer, and returns a list of the digits in the number.
 
 def digit_list(integer)
-  array = integer.to_s.split("")
-  array.map { |ele| ele.to_i }
+  integers.to_s.chars.map(&:to_i)
+
+  # 12345.to_s.chars => %w(1 2 3 4 5)
 end
 
 p digit_list(12345) == [1,2,3,4,5]
@@ -28,17 +29,18 @@ p digit_list(12345) == [1,2,3,4,5]
 # 4. Write a method that counts the number of occurrences of each element in a given array. The words in the array are case-sensitive: 'suv' != 'SUV'. ` Once counted, print each element alongside the number of occurrences.
 
 vehicles = [
-  'car', 'car', 'truck', 'car', 'SUV', 'truck',
+  'car', 'car', "CAR", 'truck', 'car', 'SUV', 'truck',
   'motorcycle', 'motorcycle', 'car', 'truck'
 ]
 
 def count_occurrences(vehicles)
   hash_vehicles = Hash.new(0)
+  vehicles = vehicles.map(&:downcase)
   vehicles.each { |ele| hash_vehicles[ele] += 1 }
   hash_vehicles.each { |key, value| puts "#{key} => #{value}" }
 end
 
-puts count_occurrences(vehicles)
+count_occurrences(vehicles)
 
 # 5. Write a method that takes one argument, a string, and returns a new string with the words in reverse order.
 
@@ -46,11 +48,40 @@ def reverse_words(string)
   split_sentence = string.split
   reversed_words = []
   split_sentence.each { |word| reversed_words.unshift(word) }
-  split_sentence.inject { |word| acc }
   reversed_words.join(" ")
+
+  # OPTIMIZED SOLUTION
+  # string.split.reverse.join(" ")
 end
 
-p reverse_words("Hello!")
+p reverse_words("Hello World!")
 
 # 6. Write a method that takes one argument, a string containing one or more words, and returns the given string with words that contain five or more characters reversed. Each string will consist of only letters and spaces. Spaces should be included only when more than one word is present.
 
+def reverse_words(sentence)
+  sentence.split.map { |word| word.reverse if word.length >= 5 }.join(" ")
+end
+
+#7. Take a positive integer and return a string of alternative 1s and 0s, always starting with 1. The string length should match the integer.
+
+def stringy(integer)
+  result = ""
+  (0...integer).each do |num|
+    result << (num.even? ? "1" : "0")
+  end
+  result
+end
+
+puts stringy(5)
+
+# 8. Array average: return the average of all numbers in the array of integers passed as an argument. It will never be empty and all ints will always be positive.
+
+def average(array)
+  (array.sum/array.length).to_f
+end
+
+# 9. Sum of digits: return a sum of the digits of a number. E.g. 23 = 2 + 3
+
+def sum_digits(integer)
+  integer.to_s.split.inject(&:+)
+end

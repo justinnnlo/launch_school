@@ -1,0 +1,9 @@
+win: "You won!"
+lose: "You lost!"
+tie: "You tied with the computer!"
+win_round: "You won this round! You had %{player_wins} wins and the computer had %{computer_wins}."
+lose_round: "You lost this round! You had %{player_wins}
+            wins and the computer had %{computer_wins}."
+invalid_choice: "That's not a valid choice."
+choices: "You chose %{choice} and the computer chose %{computer_choice}"
+play_again: "Do you want to play again?"

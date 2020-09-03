@@ -50,7 +50,7 @@ def retrieve_annual_or_monthly
   loop do
     annual_or_monthly = gets.chomp
     break annual_or_monthly if annual_or_monthly.downcase == "a" ||
-             annual_or_monthly.downcase == "m"
+                               annual_or_monthly.downcase == "m"
     prompt messages("incorrect_annual_or_monthly")
   end
 end
@@ -79,10 +79,10 @@ end
 
 def confirm_details(amount_loan, interest_monthly, duration_months)
   prompt format(messages("confirm_details"),
-      amount_loan: amount_loan,
-      interest_monthly: decimal_to_percentage(interest_monthly),
-      interest_annual: decimal_to_percentage(interest_monthly * 12),
-      duration_months: duration_months)
+  amount_loan: amount_loan,
+  interest_monthly: decimal_to_percentage(interest_monthly),
+  interest_annual: decimal_to_percentage(interest_monthly * 12),
+  duration_months: duration_months)
 end
 
 def calculate_payment(amount_loan, interest_monthly, duration_months)
@@ -92,7 +92,7 @@ end
 
 def new_calculation?
   prompt messages("repeat?")
-  repeat = gets.chomp.downcase
+  gets.chomp.downcase
 end
 
 def clean_terminal
@@ -127,14 +127,15 @@ loop do
 
     prompt messages("duration_months")
     duration_months = retrieve_months
-    
+
     confirm_details(amount_loan, interest_monthly, duration_months)
 
     confirm = gets.chomp.downcase
     break if confirm != "n"
   end
 
-  payment_monthly = calculate_payment(amount_loan, interest_monthly, duration_months)
+  payment_monthly = calculate_payment(amount_loan, interest_monthly,
+                                      duration_months)
   prompt format(messages("monthly_payment"), payment_monthly: payment_monthly)
 
   break if new_calculation? != "y"

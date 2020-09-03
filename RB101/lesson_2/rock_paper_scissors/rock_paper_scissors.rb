@@ -1,9 +1,9 @@
-require 'byebug'
+require 'yaml'
 
 VALID_CHOICES = %w(rock paper scissors spock lizard)
 DISPLAY_VALID_CHOICES = %w(rock\ (r) paper\ (p) scissors\ (s)
                            spock\ (S) lizard\ (l))
-
+MESSAGES = YAML.load_file("messages.yml")
 WIN = {
   "rock" => ["scissors", "lizard"],
   "scissors" => ["paper", "lizard"],
@@ -14,11 +14,11 @@ WIN = {
 
 def display_results(player, computer)
   if win?(player, computer)
-    prompt("You won!")
+    puts MESSAGES["win"]
   elsif win?(computer, player)
-    prompt("Computer won!")
+    puts MESSAGES["lose"]
   elsif player == computer
-    prompt("It's a tie!")
+    puts MESSAGES["tie"]
   end
 end
 
@@ -36,11 +36,11 @@ end
 
 def declare_winner(player_wins, computer_wins)
   if player_wins > computer_wins
-    prompt("You won this round! You had #{player_wins}
-            wins and the computer had #{computer_wins}.")
+    puts format(MESSAGES["win_round"], 
+      player_wins: player_wins, computer_wins: computer_wins)
   else
-    prompt("You lost this round! You had #{player_wins}
-            wins and the computer had #{computer_wins}.")
+    puts format(MESSAGES["win_round"],
+      player_wins: player_wins, computer_wins: computer_wins)
   end
 end
 
@@ -69,18 +69,19 @@ loop do
       if VALID_CHOICES.include?(choice)
         break # break can't be a value returned by a method
       else
-        prompt("That's not a valid choice.")
+        puts MESSAGES["invalid_choice"]
       end
     end
 
     computer_choice = VALID_CHOICES.sample
 
-    Kernel.puts("You chose #{choice} and the computer chose #{computer_choice}")
+    puts format(MESSAGES["choices"], 
+      choice: choice, computer_choice: computer_choice)
 
     display_results(choice, computer_choice)
 
     if choice == computer_choice
-      next # Insight: without next Ruby reads as if the conditional didn't exist
+      next
     elsif win?(choice, computer_choice)
       player_wins += 1
     else
@@ -92,7 +93,7 @@ loop do
 
   declare_winner(player_wins, computer_wins)
 
-  prompt("Do you want to play again?")
+  prompt MESSAGES["play_again"]
 
   answer = Kernel.gets.chomp
 
