@@ -36,11 +36,13 @@ end
 
 def declare_winner(player_wins, computer_wins)
   if player_wins > computer_wins
-    puts format(MESSAGES["win_round"], 
-      player_wins: player_wins, computer_wins: computer_wins)
+    puts format(MESSAGES["win_round"],
+                player_wins: player_wins,
+                computer_wins: computer_wins)
   else
     puts format(MESSAGES["win_round"],
-      player_wins: player_wins, computer_wins: computer_wins)
+                player_wins: player_wins,
+                computer_wins: computer_wins)
   end
 end
 
@@ -75,8 +77,9 @@ loop do
 
     computer_choice = VALID_CHOICES.sample
 
-    puts format(MESSAGES["choices"], 
-      choice: choice, computer_choice: computer_choice)
+    puts format(MESSAGES["choices"],
+                choice: choice,
+                computer_choice: computer_choice)
 
     display_results(choice, computer_choice)
 
