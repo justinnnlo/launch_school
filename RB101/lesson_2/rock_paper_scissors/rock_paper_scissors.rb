@@ -40,7 +40,7 @@ def declare_winner(player_wins, computer_wins)
                 player_wins: player_wins,
                 computer_wins: computer_wins)
   else
-    puts format(MESSAGES["win_round"],
+    puts format(MESSAGES["lose_round"],
                 player_wins: player_wins,
                 computer_wins: computer_wins)
   end
