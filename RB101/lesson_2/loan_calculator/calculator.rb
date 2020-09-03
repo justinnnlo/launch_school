@@ -79,10 +79,10 @@ end
 
 def confirm_details(amount_loan, interest_monthly, duration_months)
   prompt format(messages("confirm_details"),
-  amount_loan: amount_loan,
-  interest_monthly: decimal_to_percentage(interest_monthly),
-  interest_annual: decimal_to_percentage(interest_monthly * 12),
-  duration_months: duration_months)
+                amount_loan: amount_loan,
+                interest_monthly: decimal_to_percentage(interest_monthly),
+                interest_annual: decimal_to_percentage(interest_monthly * 12),
+                duration_months: duration_months)
 end
 
 def calculate_payment(amount_loan, interest_monthly, duration_months)
