@@ -1,4 +1,5 @@
-require 'yaml'
+require "yaml"
+require "byebug"
 
 VALID_CHOICES = %w(rock paper scissors spock lizard)
 DISPLAY_VALID_CHOICES = %w(rock\ (r) paper\ (p) scissors\ (s)
@@ -12,18 +13,20 @@ WIN = {
   "spock" => ["rock", "scissors"]
 }
 
-def display_results(player, computer)
-  if win?(player, computer)
-    puts MESSAGES["win"]
-  elsif win?(computer, player)
-    puts MESSAGES["lose"]
-  elsif player == computer
-    puts MESSAGES["tie"]
+def display_results(winner, player_wins, computer_wins)
+  if winner == "player"
+    puts format(MESSAGES["win"], player_wins: player_wins, computer_wins: computer_wins)
+  elsif winner == "computer"
+    puts format(MESSAGES["lose"], player_wins: player_wins, computer_wins: computer_wins)
+  else
+    puts format(MESSAGES["tie"], player_wins: player_wins, computer_wins: computer_wins)
   end
 end
 
 def win?(first, second)
-  WIN[first].include?(second)
+  return "tie" if first == second
+  return "player" if WIN[first].include?(second)
+  "computer"
 end
 
 def choice_translator(choice)
@@ -54,6 +57,21 @@ def prompt(message)
   Kernel.puts("=> #{message}")
 end
 
+def input_choice
+  loop do
+    prompt "Choose one: #{DISPLAY_VALID_CHOICES.join(', ')}"
+
+    choice = Kernel.gets().chomp()
+    choice = choice_translator(choice) if choice.length == 1
+
+    if VALID_CHOICES.include?(choice)
+      return choice
+    else
+      puts MESSAGES["invalid_choice"]
+    end
+  end
+end
+
 loop do
   clear_screen
 
@@ -62,18 +80,7 @@ loop do
   choice = ""
 
   loop do
-    loop do
-      prompt "Choose one: #{DISPLAY_VALID_CHOICES.join(', ')}"
-
-      choice = Kernel.gets().chomp()
-      choice = choice_translator(choice) if choice.length == 1
-
-      if VALID_CHOICES.include?(choice)
-        break # break can't be a value returned by a method
-      else
-        puts MESSAGES["invalid_choice"]
-      end
-    end
+    choice = input_choice
 
     computer_choice = VALID_CHOICES.sample
 
@@ -81,15 +88,12 @@ loop do
                 choice: choice,
                 computer_choice: computer_choice)
 
-    display_results(choice, computer_choice)
+    winner = win?(choice, computer_choice)
 
-    if choice == computer_choice
-      next
-    elsif win?(choice, computer_choice)
-      player_wins += 1
-    else
-      computer_wins += 1
-    end
+    player_wins += 1 if winner == "player"
+    computer_wins += 1 if winner == "computer"
+
+    display_results(winner, player_wins, computer_wins)
 
     break if player_wins == 5 || computer_wins == 5
   end
