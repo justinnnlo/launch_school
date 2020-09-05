@@ -113,6 +113,8 @@ But if the first expression is `p array.map`, what happens with its block? As wi
     end
     => nil
 
-In this code block, `p` lacks its argument 
+In this code block, `p` lacks its argument.
+
+This also implies that a block without method invocations does **not create a scope**.
 
 # Takeaway: use parentheses!!!

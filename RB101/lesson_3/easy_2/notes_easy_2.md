@@ -1,0 +1,8 @@
+- Hashes
+  - `include?` and `member?` returns true if a key equals the argument passed to the method
+  - `<<` and `+` do NOT work for hashes
+  - For hash concatenation and mutation, use `merge`
+- Key limitation of `include?`, `match` and similar methods
+  - It matches any pattern, even if it`s part of a wider combination of character
+- `String#slice` *keeps* the content that is sliced
+- Center strings with `center` method, where the argument is the width
