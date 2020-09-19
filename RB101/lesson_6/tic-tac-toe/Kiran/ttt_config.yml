@@ -1,0 +1,88 @@
+'en':
+      :welcome: 'Welcome to another exciting game of TIC TAC TOE'
+      :get_name: Enter Your Name
+      :valid_name: Make sure to enter a valid name
+      :greet: Hi
+      :choose_option: |
+            Choose One of the Following Options
+            1) New Game
+            2) Settings
+            3) Shortcut Keys
+            enter q to quit
+      :valid_option: Make sure to enter a valid option from 1,2 or 3
+
+      :user_move: "Choose the Square you want to mark from "
+      :invalid_out_of_bounds: "Please choose an integer value between 1 and 9"
+      :invalid_already_chosen: "Please choose an empty Square"
+      :invalid_not_integer: "Selected squares can only be integers"
+
+      :move_made: "has marked square"
+      :continue: Type y/yes to Continue or n/no to exit the game
+      :separator: "###################################################################################"
+
+      :grand_winner: "All hail the Grand Winner, "
+      :continue_grand_winner: |
+            Would you like to start a new game?
+            Type y/yes to Continue or n/no to exit the game
+      :winner: "Smart move quitting while ahead, "
+      :loser: "I hope you have better luck next time, "
+      :tie: "You have met your match, "
+      :winner_cutoff: "Number of games required to be named Grand Winner:"
+      :continue: Type y/yes to Continue or n/no to exit the game
+      :quit: |
+            Are you sure. You will lose all your progress
+            Type y/yes to continue exiting the current game
+            Type anything else to continue with the game
+      :thanks: Come Back Again For Another Exciting Game Of TIC TAC TOE
+      :thanks_game_win: Why don't you try again at a tougher level, 
+      :thanks_game_loss: Why don't you try again at an easier level, 
+      :settings_welcome: |
+            Which setting do you want to change
+            Type the setting number or setting name to make your selection
+      :settings_other_options: |
+            Press s to save changes and  exit
+            Press q to exit without saving changes
+      :valid_setting: "Invalid setting please try again"
+      :chosen_setting: "You have chosen"
+
+
+      :row_separator_help: "Change the Row Separator for the boards (Single Character, Not Blank)"
+      :col_separator_help: "Change the Column Separator for the boards (Single Character, Not Blank)"
+      :intersection_marker_help: "Change the marker for intersections of row and column (Single Character)"
+      :marker_user_help: "Change the marker for players move (Single Character)"
+      :marker_computer_help: "Change the marker for computers move (Single Character)"
+      :marker_initial_help: "Change the marker for intersections of row and column (Single Character)"
+      :row_height_help: "Change the height of each row (Odd Integer)"
+      :col_width_help: "Change the width of each col (Odd Integer)"
+      :winner_cutoff_help: "Number of wins to be declared Grand Winner (Pos Integer)"
+      :difficulty_help: |
+            Set the difficulty level for the game.
+            Options are easy, medium, hard and hell
+      :who_starts_help: |
+            Set who will begin each round
+            options are user, computer and random
+      :show_markers_help: |
+            Decide whether to show player markers after each move
+            options are true, false
+      
+      :update_setting: "Please enter the new value you want to use for "
+      
+      :valid_marker: "Invalid value. Markers should be a single character string. Please Try Again"
+      :duplicate_marker: "Chosen Value is already assigned to another marker. Please enter a different value"
+      :valid_dim: Dimensions should be positive odd numbers
+      :valid_cutoff: The winner cutoff should be a positive number
+      :valid_choice: "Invalid choice, pleasue choose from the available options:"
+
+      ########## Short cut info
+      "score_help": Shows the current score during a game
+      "gp_help": Shows the game parameters during a game
+      "ss_help": Shows the current settings
+      "h_help": Help
+      "s_help": Save setting
+      "q_help": Quit
+      "c_help": Clear the screen
+
+      :shortcut_msg: "Type Q to quit"
+      :shortcut_intro: |
+            Shortcut keys usable at various game prompts
+            WARNING (Availability depends on the context)

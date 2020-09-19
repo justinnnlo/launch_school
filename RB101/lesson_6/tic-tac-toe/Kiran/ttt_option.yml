@@ -1,0 +1,12 @@
+:marker_user: X
+:marker_computer: O
+:marker_initial: " "
+:row_separator: "-"
+:col_separator: "|"
+:intersection_marker: "+"
+:row_height: 3
+:col_width: 5
+:winner_cutoff: 3
+:difficulty: hell
+:who_starts: user
+:show_markers: 'true'
