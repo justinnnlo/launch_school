@@ -16,6 +16,9 @@
   - Mutate board if correct, otherwise return to the previous step
   - Break loop
 3. Has the player won?
+  - Select all positions (key only) with his marker
+  - Create all combinations with the keys
+  - Check if any combination is found within WINNING_COMBINATIONS
 4. If the game is not over, it's the turn of the other player to take a tile
 5. Repeat step 3
 6. If the player or the computer has won, does the user want to play again?
