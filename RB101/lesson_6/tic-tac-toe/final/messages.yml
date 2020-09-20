@@ -1,15 +1,18 @@
 welcome:           |
                    Welcome to Tic Tac Toe!
                    >> You can only move in places that are empty. When you move, your locations will have an "X" wheareas the computer's will have an "O".
+                   >> You'll play against the computer. The first one with 5 victories is crowned the grand winner!
 
-first_mover:       Who would you like to start each round? Press "p" or "player" if you want to start. Otherwise, the computer will start.
+first_mover:       Who would you like to start each round? Press "yes" if you want to start or "no" if you'd like the computer to start.
+
+wrong_first_mover: You entered an incorrect input when choosing who starts the tic-tac-toe games.
 
 player_move:       |
                    To what location would you like to move? These locations are available — %{empty_locations}
 
-wrong_input:       The number you entered is not valid. You must enter the number of a valide (1-9) empty location.
+wrong_input:       Your input is not valid. You must enter an integer between 1 to 9 of an empty board location.
 
-replay?:           Do you want to play again? Press "y" if you want to.
+replay?:           Do you want to play again? Press "yes" if you want to.
 
 computer_win_game: The computer won the game!
 

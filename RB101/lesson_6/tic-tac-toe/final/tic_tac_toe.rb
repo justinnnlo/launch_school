@@ -1,4 +1,5 @@
 require "yaml"
+require "byebug"
 
 # === Constants ===
 
@@ -80,11 +81,15 @@ end
 
 def choose_first_mover
   if FIRST_MOVER.downcase == "choose"
-    print_message("first_mover")
-    first_mover = gets.chomp
-    return "player" if first_mover.downcase == "p" ||
-                       first_mover.downcase == "player"
-    "computer"
+    loop do
+      print_message("first_mover")
+      first_mover = gets.chomp
+      return "player" if first_mover.downcase == "y" ||
+                        first_mover.downcase == "yes"
+      return "computer" if first_mover.downcase == "n" ||
+      first_mover.downcase == "no"
+      print_message("wrong_first_mover")
+    end
   else
     FIRST_MOVER
   end
@@ -93,7 +98,8 @@ end
 # === Methods: moving ===
 
 def valid_move?(move, board)
-  empty_locations_hash(board).keys.include?(move)
+  return false if move.class == Float
+  empty_locations_hash(board).keys.include?(move.to_i)
 end
 
 def player_move!(board)
@@ -101,9 +107,9 @@ def player_move!(board)
     display_board(board)
 
     puts format(">> " + MESSAGES["player_move"], empty_locations: joinor(board))
-    move = gets.chomp.to_i
+    move = gets.chomp
     if valid_move?(move, board)
-      board[move] = PLAYER_MARKER
+      board[move.to_i] = PLAYER_MARKER
       break
     end
     print_message("wrong_input")
@@ -257,7 +263,8 @@ def play_game
     play_full_round(starting_player)
 
     print_message("replay?")
-    break if gets.chomp.downcase != "y"
+    replay = gets.chomp.downcase
+    break if replay != "yes"
   end
 end
 
