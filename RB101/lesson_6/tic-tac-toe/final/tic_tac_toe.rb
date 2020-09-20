@@ -85,9 +85,9 @@ def choose_first_mover
       print_message("first_mover")
       first_mover = gets.chomp
       return "player" if first_mover.downcase == "y" ||
-                        first_mover.downcase == "yes"
+                         first_mover.downcase == "yes"
       return "computer" if first_mover.downcase == "n" ||
-      first_mover.downcase == "no"
+                           first_mover.downcase == "no"
       print_message("wrong_first_mover")
     end
   else
