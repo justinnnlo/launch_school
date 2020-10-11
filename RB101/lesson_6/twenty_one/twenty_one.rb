@@ -1,8 +1,10 @@
 require "yaml"
+require "byebug"
 
 # === Constants ===
 
 MESSAGES = YAML.load_file("messages.yml")
+ROUNDS_TO_WIN = 5
 CARD_VALUES = {
   2 => 2,
   3 => 3,
@@ -45,10 +47,11 @@ def deal_card(deck, hand)
 end
 
 def deal_two_cards(deck, player, computer)
-  deal_card(deck, player)
-  deal_card(deck, computer)
-  deal_card(deck, player)
-  deal_card(deck, computer)
+  # OPTIMIZED: #times method over writing the deal_card method 4 times
+  2.times do |_|
+    deal_card(deck, player)
+    deal_card(deck, computer)
+  end
 end
 
 # === Methods: count ===
@@ -81,29 +84,19 @@ def busted?(hand)
   count_points(hand) > 21
 end
 
-def player_busted?(hand)
-  if busted?(hand)
-    system_clear
-    prompt(format(MESSAGES["busted"], participant: "You're"))
-    puts ""
-    true
-  else
-    false
-  end
+def display_player_busted
+  system_clear
+  prompt(format(MESSAGES["busted"], participant: "You're"))
+  puts ""
 end
 
-def computer_busted?(hand)
-  if busted?(hand)
-    system_clear
-    prompt(format(MESSAGES["busted"], participant: "The computer's"))
-    puts ""
-    true
-  else
-    false
-  end
+def display_computer_busted
+  system_clear
+  prompt(format(MESSAGES["busted"], participant: "The computer's"))
+  puts ""
 end
 
-def computer_wins(player_hand, computer_hand)
+def display_computer_win(player_hand, computer_hand)
   system_clear
   prompt(format(MESSAGES["computer_win"],
                 computer_points: count_points(computer_hand),
@@ -112,13 +105,13 @@ def computer_wins(player_hand, computer_hand)
   :computer
 end
 
-def tie
+def display_tie
   system_clear
   prompt(MESSAGES["tie"])
   puts ""
 end
 
-def player_wins(player_hand, computer_hand)
+def display_player_win(player_hand, computer_hand)
   system_clear
   prompt(format(MESSAGES["player_win"],
                 computer_points: count_points(computer_hand),
@@ -127,19 +120,19 @@ def player_wins(player_hand, computer_hand)
   :player
 end
 
-def compare_hands(player_hand, computer_hand)
+def determine_winner(player_hand, computer_hand)
   case count_points(player_hand) <=> count_points(computer_hand)
   when -1
-    computer_wins(player_hand, computer_hand)
+    display_computer_win(player_hand, computer_hand)
   when 0
-    tie
+    display_tie
   when 1
-    player_wins(player_hand, computer_hand)
+    display_player_win(player_hand, computer_hand)
   end
 end
 
 def announce_winner(player_wins, computer_wins)
-  if player_wins == 5
+  if player_wins == ROUNDS_TO_WIN
     prompt(format(MESSAGES["champion"], winner: "You",
                                         player_wins: player_wins,
                                         computer_wins: computer_wins))
@@ -197,9 +190,9 @@ def player_move(deck, player_hand, dealer_card)
   loop do
     break if busted?(player_hand)
     move = get_user_input(player_hand, dealer_card)
-    if move.downcase == "h" || move.downcase == "hit"
+    if ["h", "hit"].include?(move.downcase)
       deal_card(deck, player_hand)
-    elsif move.downcase == "s" || move.downcase == "stay"
+    elsif ["s", "stay"].include?(move.downcase)
       break
     else
       system_clear
@@ -215,10 +208,7 @@ def get_user_input(player_hand, dealer_card)
 end
 
 def computer_move(deck, computer_hand)
-  loop do
-    deal_card(deck, computer_hand) if count_points(computer_hand) < 17
-    break if count_points(computer_hand) >= 17
-  end
+    deal_card(deck, computer_hand) until count_points(computer_hand) >= 17
 end
 
 # === Methods: core looping ===
@@ -227,18 +217,18 @@ def play_single_game(deck, wins, player_hand, computer_hand)
   display_score(wins[:player], wins[:computer])
 
   player_move(deck, player_hand, computer_hand[0])
-  if player_busted?(player_hand)
+  if busted?(player_hand)
     wins[:computer] += 1
-    return
+    return display_player_busted
   end
 
   computer_move(deck, computer_hand)
-  if computer_busted?(computer_hand)
+  if busted?(computer_hand)
     wins[:player] += 1
-    return
+    return display_computer_busted
   end
 
-  winner = compare_hands(player_hand, computer_hand)
+  winner = determine_winner(player_hand, computer_hand)
   wins[winner] += 1 if winner == :player || winner == :computer
 end
 
@@ -252,7 +242,7 @@ def play_full_round(wins)
 
     play_single_game(deck, wins, player_hand, computer_hand)
 
-    break if wins[:computer] == 5 || wins[:player] == 5
+    break if wins[:computer] == ROUNDS_TO_WIN || wins[:player] == ROUNDS_TO_WIN
   end
 end
 
@@ -271,7 +261,7 @@ end
 def play_again?
   prompt(MESSAGES["replay?"])
   replay = gets.chomp
-  true unless replay.downcase == "yes"
+  true unless ["y", "yes"].include?(replay.downcase)
 end
 
 # === Core gameplay ===

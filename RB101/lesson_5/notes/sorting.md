@@ -1,3 +1,51 @@
+What is sorting?
+What data types would you typically like to sort? Which ones would you typically not need to?
+What's the data type returned by `Enumerable#sort` and `Enumerable#sort_by`? => Array!
+What's the difference between `Enumerable#sort` and `Enumerable#sort_by`?
+  - Reply: sort_by *requires* a block to be passed to the method
+How does #sort work under the hood (tip: <=>/spaceship operator which returns -1, 0, 1 or nil)
+  - What does each of the 4 values mean? What happens with a 0?
+  - How does the spaceship operator know what's greater or less then? => ASCII
+  - Work on live examples without running the code
+  - Examples:
+    - `["1", "hi", "!", "45"].sort`
+    - `[1, 2, "three"].sort`
+    - `[1, 2, 3].sort`
+    - `[1, 2, { 3 => "three"}].sort`
+
+
+Exercises
+
+```ruby
+
+['arc', 'bat', 'cape', 'ants', 'cap'].sort
+
+['arc', 'bat', 'cape', 'ants', 'cap', 5].sort { |a, b| a[0..-1] <=> b[0..-1] }
+
+# Lesson: only the same data types
+['arc', 'bat', 'cape', 'ants', 'cap', 5].sort
+
+
+
+# Lesson: even with nested arrays
+[['a', 'cat', 'b', 'c'], [2, 'b'], [3, 'a', 'car', 'd'], ['a', 'car', 'd']].sort
+
+# Lesson: #sort short circuits
+[['a', 'cat', 'b', 'c'], ['b', 2], ['a', 'car', 'd', 3], ['a', 'car', 'd']].sort
+
+# Lesson: Enumerable#sort only compares the elements that are passed to it!
+arr = %w(array fudge marriachi lucuma senor)
+arr.sort { |a, b| b[1] <=> a[1] }
+arr.sort { |a, b| a[1] <=> b[1] }
+arr.sort { |a, b| b[1..-1] <=> a[1..-1] }
+arr.sort { |a, b| a[1..1] <=> b[1..1] }
+
+# Question: how can we sort things by their 2nd character?
+arr.sort_by { |word| word[1..-1] }
+```
+
+
+
 # What is sorting?
 
 Sorting is setting the order of a collection according to a specified criteria.
@@ -36,7 +84,7 @@ Something to keep in mind is that numbers come before uppercase letters which co
 
 ### Other comparison methods
 
-`sort` and `sort_by` aren't the only method that use `<=>` under the hood. Others include:
+`sort` isn't the only method that uses `<=>` under the hood. Others include:
 - min
 - max
 - minmax
@@ -59,8 +107,10 @@ end # [1, 2, 3, 5, 7, 8]
   a <=> b
 end # [1, 2, 3, 5, 7, 8]
 
-# ...or it'ññ return an Argument Error
+# ...or it'll return an Argument Error
 [1,5,3,2,7,8].sort do |a, b|
+  a <=> b
+  puts "#{a} vs #{b}"
 end # ArgumentError: comparison of String with String failed
 
 # reverse sort: high to low

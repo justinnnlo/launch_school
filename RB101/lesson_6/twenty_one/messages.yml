@@ -1,7 +1,7 @@
 welcome: |
                   Welcome to a game of Twenty-One!
                   >> The participant to get to 5 wins first wins the game!
-                  >> Type "rules" if you want to see the game rules, or any other key to start the game.
+                  >> Type "rules" if you want to see the game rules, or press any other key to start the game.
 
 rules:            |
                   Rules of the game
@@ -34,6 +34,6 @@ tie:              It's a tie! There isn't any winner.
 champion: |
                   %{winner} won the tournament! You had %{player_wins} victories while the computer had %{computer_wins} victories.
 
-replay?:          Type "yes" if you want to play again, or any other key to exit the program.
+replay?:          Type "y" or "yes" if you want to play again, or any other key to exit the program.
 
 goodbye:          Thanks for playing and goodbye!

@@ -58,7 +58,7 @@ end
 # Variation: same as above but mutating the array
 
 def double_numbers!(numbers)
-  
+
   count = 0
   loop do
     break if count >= numbers.length

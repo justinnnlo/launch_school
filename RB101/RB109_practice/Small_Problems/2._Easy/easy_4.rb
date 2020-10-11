@@ -104,7 +104,7 @@ end
 # OPTIMAL idiomatic solution
 
 def leap_year?(year)
-  year % 400 == 0 || (year % 4 == 0 and year % 100 != 0)
+  year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)
   year % 400 == 0 || year % 4 == 0 unless year % 100 == 0
 end
 
@@ -122,11 +122,6 @@ leap_year?(1) == false
 leap_year?(100) == false
 leap_year?(400) == true
 
-arr = %w(array fudge marriachi lucuma senor)
-arr.sort do |a, b|
-  b[1] <=> a[1]
-end
-arr.sort do |a, b|
-  byebug
-  a[1] <=> b[1]
-end
+
+
+# 4. 
