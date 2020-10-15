@@ -46,7 +46,7 @@ Modules are blocks of code that can be reused across different classes. This is 
 ### Creating modules
 
 Modules are defined via the `module` keyword, similarly to methods and classes.
-    
+
     module Bark
         def bark
             puts "Woof woof!"
@@ -120,3 +120,64 @@ Modules are added within classes via de `include <module_name>` syntax.
         include Help
     end
 For example, in the above block we've created two classes: `Cook` and `KitchenDishes`. We've also created the `Help` module and added it in both classes — so we can call the method on instances of both methods. 
+
+
+
+
+
+
+# **Free recall**
+
+# What are objects?
+
+Objects are like shells — they're a container. Objects contain 2 things: attributes, or data of the specific object, and through its class the rules for how the object can be manipulated. An object can be manipulated through i) rules for how to retrieve and modify its attributes and ii) through class or instance methods.
+
+
+# Classes and objects
+
+All objects belong to a class. For example, `true` belongs to `TrueClass` and `"hi"` belongs to `String`.
+
+Classes have superclasses up to the BasicObject class, which is the originator of all classess.
+
+When you create a non-native class, you can make it a descendent or ascendent of other classes. This means that the descendent class will inherit the properties of its ancestor unless it overrides it in some way.
+
+```ruby
+"hi".class
+=> String
+"hi".class.superclass
+=> Object
+"hi".class.superclass.superclass
+=> BasicObject
+"hi".class.superclass.superclass.superclass
+=> nil # Because BasicObject doesn't have an ancestor
+```
+
+# Modules
+
+Modules are a collection of methods that can be included within classes. This implies that we can define a group of methods within a single module and apply them to multiple classes by including daid module in those classes.
+
+For example, the native Enumerable module is included in strings, hashes and ranges.
+
+Modules are added to classes via the `include` keyword. E.g.
+
+```ruby
+module Hello
+end
+
+class MyClass
+    include Hello
+end
+
+my_obj = Myclass.new
+```
+
+# Class and module lookup
+
+When you're searching for where a method is defined, you need to go through an object's classes and modules.
+
+You can do that via `[class].ancestors`. For example:
+
+```ruby
+p String.ancestors
+=> [String, Comparable, Object, PP::ObjectMixin, Kernel, BasicObject]
+```

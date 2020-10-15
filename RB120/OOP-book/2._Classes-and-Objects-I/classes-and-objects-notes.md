@@ -112,13 +112,13 @@ See the code above: we're making `name` read (getter) only, `age` write (setter)
 1. Create a **class called MyCar**. When you initialize a new instance or object of the class, **allow the user to define some instance variables that tell us the year, color, and model of the car. Create an instance variable that is set to 0 during instantiation of the object to track the current speed of the car as well**. Create instance methods that allow the car to **speed up, brake, and shut the car off**.
 
 In essence, this requires us to create 4 instance variables. 3 are bound to the arguments of the user and 1 is bound to 0. We also need to create 3 methods:
-  
+
 a. Speed up: increase the speed by the argument sent
 b. Brake: decrease the speed by the argument sent
-c. Shut off: set speed to 0 
+c. Shut off: set speed to 0
 
     class MyCar
-      
+
       def initialize(year, color, model)
         @year = year
         @color = color
@@ -163,3 +163,61 @@ c. Shut off: set speed to 0
         puts "Your new #{color} car is fantastic!"
       end
     end
+
+
+
+# **Free recall**
+
+# States and behaviors
+
+Classes define 2 things: an object's state and its behavior.
+
+The object's state refers to the data that's associated with the object — it's attributes.
+
+An object's behaviors refer to how we can retrieve and modify the object's data — that is, it's accessor methods.
+
+
+# Initializing a new object
+
+An object is initialized when the `::new` class method is called.
+
+But for an object to be passed an argument it needs to initialize them within the class so the object knows what to do with those arguments.
+
+This is done within the `def initialize(p1..pN)` method definition within the class, where `p1..pN` are every parameter from 1 to N (note: it can also be 0).
+
+Within the initialize method, the class has to bind a local variable to the argument.
+
+Hence, below we are initializing the instance variable `p1` and binding it with the argument passed to the object `@p1`. But note that we don't need to pass an object, as `p2 = 10` demonstrates
+
+```ruby
+class MyMethod
+  def initialize(p1)
+    @p1 = p1          # p1 is a local variable, @p1 is an INSTANCE variable
+    @p2 = 10
+  end
+  attr_accessor :p1, :p2
+end
+```
+
+# Instance variables
+
+`@p1` and `@p2` above are instance variables — variables that are accessible throughout the class definition for a specific instance of the class.
+
+# Instance methods
+
+Instance methods refer to methods that are available to specific instances rather than to the class itself.
+
+# Accessor methods
+
+```ruby
+class MyMethod
+
+  def initialize(a1, a2, a3) # Each parameter is an object passed to the object as its initialized
+    a1 = @a1                 # @ refers to an instance variable
+    a2 = @a2
+    a3 = @a3
+  end
+
+  attr_accessor :a1, :a2, :a3 #
+end
+```
