@@ -172,7 +172,7 @@ c. Shut off: set speed to 0
 
 Classes define 2 things: an object's state and its behavior.
 
-The object's state refers to the data that's associated with the object — it's attributes.
+The object's state refers to the data that's associated with the object — it's ~~attributes~~ instance variables.
 
 An object's behaviors refer to how we can retrieve and modify the object's data — that is, it's accessor methods.
 
