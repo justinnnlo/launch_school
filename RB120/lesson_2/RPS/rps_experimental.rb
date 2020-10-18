@@ -75,7 +75,7 @@ class Human < Player
     self.name = n
   end
 
-  def choose
+  def choose_move
     choice = nil
     loop do
       puts "\nPlease choose rock, paper, scissors, spock or lizard:"
@@ -103,7 +103,7 @@ class Computer < Player
     self.name = ["R2D2", "Hal", "Chappie", "Sonny", "Number 5"].sample
   end
 
-  def choose
+  def choose_move
     self.move = RPSGame::VALUES.values.sample
   end
 end
@@ -170,8 +170,8 @@ class RPSGame
   end
 
   def player_choices
-    human.choose
-    computer.choose
+    human.choose_move
+    computer.choose_move
     clear_screen
   end
 
