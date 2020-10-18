@@ -1,51 +1,56 @@
-require "byebug"
-
 class Move
-  attr_reader :value
-
-  VALUES = ["rock", "paper", "scissors", "spock", "lizard"]
-  WINNING_COMBINATIONS = {
-    "rock" => ["scissors", "lizard"],
-    "paper" => ["rock", "spock"],
-    "scissors" => ["paper", "lizard"],
-    "spock" => ["scissors", "rock"],
-    "lizard" => ["spock", "paper"]
-  }
-
-  def initialize(value)
-    @value = value
-  end
-
-  def scissors?
-    @value == "scissors"
-  end
-
-  def paper?
-    @value == "paper"
-  end
-
-  def rock?
-    @value == "rock"
-  end
-
-  def lizard?
-    @value == "lizard"
-  end
-
-  def spock?
-    @value == "spock"
-  end
+  attr_reader :value, :loses, :wins
 
   def >(other_value)
-    WINNING_COMBINATIONS[value].include? other_value.value
+    wins.include? other_value.value
   end
 
   def <(other_value)
-    WINNING_COMBINATIONS[other_value.value].include? value
+    loses.include? other_value.value
   end
 
   def to_s
     @value
+  end
+end
+
+class Rock < Move
+  def initialize
+    @value = "rock"
+    @loses = ["paper", "spock"]
+    @wins = ["scissors", "lizard"]
+  end
+end
+
+class Paper < Move
+  def initialize
+    @value = "paper"
+    @loses = ["scissors", "lizard"]
+    @wins = ["spock", "rock"]
+  end
+end
+
+class Scissors < Move
+  def initialize
+    @value = "scissors"
+    @loses = ["rock", "spock"]
+    @wins = ["paper", "lizard"]
+  end
+end
+
+class Spock < Move
+  def initialize
+    @value = "spock"
+    @loses = ["paper", "lizard"]
+    @wins = ["scissors", "rock"]
+  end
+end
+
+class Lizard < Move
+  def initialize
+    @value = "lizard"
+    @loses = ["rock", "scissors"]
+    @wins = ["spock", "paper"]
   end
 end
 
@@ -64,8 +69,8 @@ class Human < Player
     loop do
       puts "What's your name?"
       n = gets.chomp.strip # n makes clearer this isn't the instance variable
-      break unless n.empty?
-      puts "Sorry, must enter a value"
+      break unless n.empty? || !!(n.match(/[^A-Za-z]/))
+      puts "Sorry, you must enter a name with only alphabetical chatacters"
     end
     self.name = n
   end
@@ -73,12 +78,23 @@ class Human < Player
   def choose
     choice = nil
     loop do
-      puts "Please choose rock, paper, scissors, spock or lizard:"
-      choice = gets.chomp
-      break if Move::VALUES.include? choice
-      puts "Sorry, invalid choice. Please enter one of: #{Moves::VALUES.join}"
+      puts "\nPlease choose rock, paper, scissors, spock or lizard:"
+      choice = choice_translator(gets.chomp.downcase)
+      break if RPSGame::VALUES.keys.include? choice
+      puts "Invalid choice. Please enter: #{RPSGame::VALUES.keys.join(', ')}"
     end
-    self.move = Move.new(choice)
+    self.move = RPSGame::VALUES[choice]
+  end
+
+  def choice_translator(input)
+    case input
+    when "r"  then "rock"
+    when "p"  then "paper"
+    when "s"  then "scissors"
+    when "sp" then "spock"
+    when "l"  then "lizard"
+    else           input.downcase
+    end
   end
 end
 
@@ -88,7 +104,7 @@ class Computer < Player
   end
 
   def choose
-    self.move = Move.new(Move::VALUES.sample)
+    self.move = RPSGame::VALUES.values.sample
   end
 end
 
@@ -97,6 +113,14 @@ class RPSGame
   attr_accessor :human, :computer
 
   WINNING_POINTS = 3
+  VALUES =
+    {
+      "rock" => Rock.new,
+      "paper" => Paper.new,
+      "scissors" => Scissors.new,
+      "spock" => Spock.new,
+      "lizard" => Lizard.new
+    }
 
   def initialize
     @human = Human.new
