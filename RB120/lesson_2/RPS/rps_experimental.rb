@@ -108,9 +108,52 @@ class Computer < Player
   end
 end
 
+module Displayable
+  def display_moves
+    # Access to human and computer instance variables as within RPSGame class
+    puts "#{human.name} chose #{human.move}"
+    puts "#{computer.name} chose #{computer.move}\n"
+  end
+
+  def display_round_result(result)
+    puts
+    if result == human
+      puts "#{human.name} won!"
+    elsif result == computer
+      puts "#{computer.name} won!"
+    else
+      puts "It's a tie!"
+    end
+  end
+
+  def display_score
+    puts "#{human.name} has #{human.score}"
+    puts "#{computer.name} has #{computer.score}"
+    puts
+  end
+
+  def display_tournament_winner
+    if human.score == RPSGame::WINNING_POINTS
+      puts "#{human.name} won the tournament!"
+    elsif computer.score == RPSGame::WINNING_POINTS
+      puts "#{computer.name} won the tournament!"
+    end
+  end
+
+  def display_welcome_message
+    puts "Welcome to Rock, Paper, Scissors, Spock, Lizard, #{human.name}!"
+  end
+
+  def display_goodbye_message
+    clear_screen
+    puts "Thanks for playing Rock, Paper, Scissors, Spock, Lizard!"
+  end
+end
+
 # Game orchestration engine
 class RPSGame
   attr_accessor :human, :computer
+  include Displayable
 
   WINNING_POINTS = 3
   VALUES =
@@ -127,13 +170,16 @@ class RPSGame
     @computer = Computer.new
   end
 
+  def reset_player_scores
+    human.score = 0
+    computer.score = 0
+  end
+
   def play
     display_welcome_message
 
     loop do
-      human.score = 0
-      computer.score = 0
-
+      reset_player_scores
       play_tournament
 
       display_tournament_winner
@@ -157,15 +203,19 @@ class RPSGame
     answer.downcase == "y"
   end
 
+  def someone_grand_winner?
+    human.score == WINNING_POINTS || computer.score == WINNING_POINTS
+  end
+
   def play_tournament
     loop do
       player_choices
       display_moves
       result = compare_moves
       add_score(result)
+      break if someone_grand_winner?
       display_round_result(result)
       display_score
-      break if human.score == WINNING_POINTS || computer.score == WINNING_POINTS
     end
   end
 
@@ -173,12 +223,6 @@ class RPSGame
     human.choose_move
     computer.choose_move
     clear_screen
-  end
-
-  def display_moves
-    # Access to human and computer instance variables as within RPSGame class
-    puts "#{human.name} chose #{human.move}"
-    puts "#{computer.name} chose #{computer.move}"
   end
 
   def compare_moves
@@ -191,42 +235,8 @@ class RPSGame
     end
   end
 
-  def display_round_result(result)
-    puts
-    if result == human
-      puts "#{human.name} won!"
-    elsif result == computer
-      puts "#{computer.name} won!"
-    else
-      puts "It's a tie!"
-    end
-  end
-
   def add_score(player)
     player.score += 1 unless player == :tie
-  end
-
-  def display_score
-    puts "#{human.name} has #{human.score}"
-    puts "#{computer.name} has #{computer.score}"
-    puts
-  end
-
-  def display_tournament_winner
-    if human.score == WINNING_POINTS
-      puts "#{human.name} won the tournament!"
-    elsif computer.score == WINNING_POINTS
-      puts "#{computer.name} won the tournament!"
-    end
-  end
-
-  def display_welcome_message
-    puts "Welcome to Rock, Papers, Scissors, Spock, Lizard!"
-  end
-
-  def display_goodbye_message
-    clear_screen
-    puts "Thanks for playing Rock, Papers, Scissors, Spock, Lizard!"
   end
 end
 

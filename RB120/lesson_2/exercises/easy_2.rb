@@ -256,7 +256,7 @@ class Noble < Person
   end
 
   private
-  
+
   def gait
     "struts"
   end
