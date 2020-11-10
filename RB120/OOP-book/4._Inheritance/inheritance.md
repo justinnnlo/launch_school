@@ -34,7 +34,7 @@ The `super` method is useful when you have methods with the same name but differ
       end
     end
 
-**When would we use it?** 
+**When would we use it?**
 - A good case study is like the above — when we want to call a superclass' method but add extended functionality to it.
   - A common approach is to call `super` in `initialize` to apply all of the instance variables of the superclass to the more detailed subclass' `intitialize`
 
@@ -42,7 +42,7 @@ The `super` method is useful when you have methods with the same name but differ
 - `Case 1`: If `super` expects but doesn't receive any arguments, it automatically forwards the arguments that were passed to the method from which `super` was called.
     class Animal
       attr_accessor :name
-      
+
       def initialize(name)
         @name = name
       end
@@ -62,7 +62,7 @@ The `super` method is useful when you have methods with the same name but differ
 
     class Animal
       attr_accessor :name
-      
+
       def initialize(name)
         @name = name
       end
@@ -81,7 +81,7 @@ The `super` method is useful when you have methods with the same name but differ
 **Case 2.b**: `super` with 1 argument and 2 instance variables in the superclass `ìnitialize` method
     class Animal
       attr_accessor :name
-      
+
       def initialize(name)
         @name = name
         @age = 0
@@ -103,7 +103,7 @@ The `super` method is useful when you have methods with the same name but differ
 **Case 3**: `super()` expects and receives no arguments — so it needs parentheses or will raise an error
     class Animal
       attr_accessor :name
-      
+
       def initialize
         @age = 0
       end

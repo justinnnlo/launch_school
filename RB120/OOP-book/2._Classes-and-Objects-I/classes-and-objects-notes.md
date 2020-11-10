@@ -51,7 +51,7 @@ Accessor methods tell the class what permissions to give users in accessing and 
 2. Setter methods, that "set" or modify the value of an instance
 
 These are defined like any other method. Let´s explore this by expanding the number of instance variables for `Cook`:
-    
+
     class Cook
         def initialize(name, age, skill)
           @name = name

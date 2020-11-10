@@ -190,3 +190,54 @@ class Square
 end
 
 puts Square.new # #<Square:0x00007fb240054638>
+
+
+
+module Diveable
+  def dive
+    "Diving underwater!"
+  end
+end
+
+module Runnable
+  def run
+    "Running!"
+  end
+end
+
+class Animal
+  def initialize(name)
+    @name = name
+  end
+end
+
+class DiveableNotRunnableAnimal < Animal
+  def dive
+    "Diving underwater!"
+  end
+end
+
+class DiveableRunnableAnimal < Animal
+  def dive
+    "Diving underwater!"
+  end
+
+  def run
+    "Running!"
+  end
+end
+
+class NotDiveableRunnableAnimal < Animal
+  def run
+    "Running!"
+  end
+end
+
+class NotDiveableNotRunnableAnimal < Animal
+end
+
+class Gannet < DiveableNotRunnableAnimal
+end
+
+class Flamingo < NotDiveableRunnableAnimal
+end
