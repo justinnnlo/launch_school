@@ -1,0 +1,39 @@
+welcome: |
+                  Welcome to a game of Twenty-One!
+                  >> The participant to get to 5 wins first wins the game!
+                  >> Type "rules" if you want to see the game rules, or press any other key to start the game.
+
+rules:            |
+                  Rules of the game
+                  The participant who gets closest to 21 points in a hand wins the match.
+                  From 2 to 10, each card is worth the same number of points.
+                  The jack, queen, and king are each worth 10 points.
+                  The ace is worth 1 point if the hand plus the ace equals more than 21, or 11 otherwise.
+                  In each turn, you can choose to get a new card ("h" for hit) or play with your current cards ("s" for stay). If you stay, you can't get any cards later on.
+                  >> Type any key to start the game.
+
+score:            You have %{player_points} win and the computer has %{computer_points} win.
+
+hand: |
+                  You have a hand worth %{points} points. Your cards are: %{cards}.
+                  >> The dealer has shown a %{dealer_card}
+
+move:             Would you like to "[h]it" or "[s]tay"?
+
+move_wrong_input: You've sent me an invalid message! Please only use either "hit" or "stay", or their first characters, to execute a move.
+
+busted: |
+                  %{participant} busted!
+
+computer_win:     You lost! The computer won with %{computer_points} points while you had %{player_points} points.
+
+player_win:       You won! You had %{player_points} points while the computer had %{computer_points} points.
+
+tie:              It's a tie! There isn't any winner.
+
+champion: |
+                  %{winner} won the tournament! You had %{player_wins} victories while the computer had %{computer_wins} victories.
+
+replay?:          Type "y" or "yes" if you want to play again, or any other key to exit the program.
+
+goodbye:          Thanks for playing and goodbye!

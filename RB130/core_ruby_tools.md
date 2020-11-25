@@ -443,3 +443,126 @@ $ rbenv versions
   2.5.3
 * 2.7.1 (set by /Users/jadlp/.rbenv/version)  # Default Ruby
 ```
+
+# Bundler
+
+Dependencies are multiple versions of Ruby and RubyGems. Dealing with them is a big issue because as discussed a bove a proejct may need a different Ruby version than your default Ruby — or RubyGem, even if you use the same Ruby version.
+
+Dependency issues are present in all languages, and each language has different techniques to address these issues.
+
+In Ruby, most developers use ruby version managers like RVM and Rbenv to manage multiple Ruby versions.
+
+Gem dependencies can also be handled by version managers but the favored approach is the use of a **dependency manager**.
+
+The most widely used dependency manager —by far— is the Bundler Gem. Bundler lets you configure which Ruby and which Gems are needed on a project-by-project basis.
+
+## Gemfile and Gemfile.lock
+
+Bundler uses a file names `Gemfile` to tell it which version of Ruby and RubyGems it should use.
+
+`Gemfile` is a Ruby program that uses a DSL to provide details about Ruby and Gem versions — it's the file that instructs Bundler what to use.
+
+After you create `Gemfile` the `bundle install` command scans `Gemfile`, downloads and installs all of the listed dependencies, and produces a `Gemfile.lock` file.
+
+[Note: though the gem is called `bundler` the command is called `bundle` without the "r" — they're aliases]
+
+`Gemfile.lock` shows all of your dependencies for your program — including the Gems listed in `Gemfile` and the Gems (i.e. dependencies) they depend on but which may not be explicitly listed in `Gemfile`. This latter part's important because it's common to use RubyGems that rely on other Gems, creating a large **dependency tree**.
+
+Example: `Gemfile` that requires `Ruby 2.3.1` and the gems `sinatra`, `erubis`, and `rack`. The `Gemfile` would look like:
+
+```ruby
+source "https://rubygems.org"
+
+ruby "2.3.1"
+gem "sinatra"
+gem "erubis"
+gem "rack"
+gem "rake", "~>10.4.0"
+```
+
+The Ruby installation on RVM would look like:
+```
+$ tree /usr/local/rvm # the following is partial output
+/usr/local/rvm # RVM path directory
+└── gems
+    ├── ruby-2.2.2
+    └── ruby-2.3.1
+        ├── bin
+        │   ├── bundle
+        │   └── rubocop
+        └── gems
+            ├── erubis-2.7.0
+            ├── rack-1.6.4
+            ├── rack-protection-1.5.3
+            ├── rake-10.4.2
+            ├── rake-11.3.0
+            ├── sinatra-1.4.6
+            ├── sinatra-1.4.7
+            └── tilt-2.0.5
+```
+
+We'd now run `bundle install` to read `Gemfile` and install all the dependencies listed (if needed) on it. This produces `Gemfile.lock`, which would look like:
+
+```
+GEM
+  remote: https://RubyGems.org/
+  specs:
+    erubis (2.7.0)
+    rack (1.6.4)
+    rack-protection (1.5.3)
+      rack
+    rake (10.4.2)
+    sinatra (1.4.7)
+      rack (~> 1.5)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
+    tilt (2.0.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  erubis
+  rack
+  rake (~> 10.4.0)
+  sinatra
+
+RUBY VERSION
+   ruby 2.3.1p112
+
+BUNDLED WITH
+   1.13.6
+```
+
+`specs` under `GEM` lists all the Gems and their versions loaded by the app. Beneath each Gem is the gem's dependencies — the gems and their versions it needs to work. For example:
+- `sinatra` version 1.4.7 has 3 dependencies
+  - `rack` version =< 2 and 1.5 >= (we have 1.6.4)
+  - `rack-protection` version =< 2 and 1.4 >= (version 1.4)
+  - `tilt` version < 3 and 1.3 >= (we have version 2.0.5)
+    - Note: `tilt` and `rake-protection` were not specified in `Gemfile` — but were included as dependencies of other gems
+
+## Running apps with bundler
+
+When `Gemfile.lock` is created by Bundler, add to the top of your app — before any other gem — `require "bundler/setup"`.
+
+[Note: this isn't needed in a Rails app]
+
+`bundler/setup`:
+1. Removes all Gem directories from Ruby's `$LOAD_PATH` global array
+  - `$LOAD_PATH` is used by Ruby to list all the directories that it searched when it needs to locate a file
+  - Thus, when `bundler/setup` removes those directories from `$LOAD_PATH` Ruby can't find any Gems
+2. `bundler/setup` reads `Gemfile.lock` and adds the directories containing each listed Gem back to `$LOAD_PATH`
+3. Thus, `require` only finds the version of each Gem listed in `Gemfile.lock` and avoids conflicting versions
+
+## `bundle exec`
+
+`bundle exec` can be used to solve dependency conflicts when using shell commands. This is a type of error we might get from running a shell command:
+
+```
+Gem::LoadError: You have already activated rake 11.3.0, but your Gemfile requires rake 10.4.2. Prepending `bundle exec` to your command may solve this.
+```
+
+These type of errors tend to appear when you run a gem command from the command line whose value differs from the Gem version in Gemfile. For example, your default `rake` is 11.3.0 but you're in a directory where `Gemfile.lock` specifies 10.4.2. Thus, we get this error because `rake` is already running the default version and we can't run two different versions of `rake` at the same time.
+
+[What seems to happen (TBC): Running `bundle exec rake` changes the environment so that the `rake` in your current directory is run rather than the system default.]
+

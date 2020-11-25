@@ -370,7 +370,7 @@ This shortcut works on any collection that takes a block.
 [1, 2, 3, 4, 5].select(&:odd?).any?(&:even?)    # => false
 ```
 
-In the above example, `(&:to_s)` is converted to `{ |num| num.to_s }`.
+In the above example, `(&:to_s)` is converted to `{ |num| num.to_s }` through the ampersand operator (`&`).
 
 - When we add `&` in front of an object it tells Ruby to convert the object into a block — so it expects a `Proc` object
   - Ruby checks if the object after `&` is a `Proc`
@@ -398,3 +398,69 @@ my_method(&:to_s)
 1. The execution of a block with `yield`
 2. Converting the symbol `:to_s` into a `Proc` and having `&` turn it into a block to be called by `yield`
 3. `&` converts `:to_s` into a `Proc`, then converts the `Proc` into a block and executes the code
+
+
+## Nuances of explicit block parameters
+
+Note that if we explicitly pass blocks we can still call the `Proc` object that is passed with `yield` — we aren't obliged to use `Proc#call`. Also, it doesn't raise an error if a method with an explicit block isn't passed one — but if called, t.
+
+```ruby
+def my_method(&block)
+  p yield if block_given?
+  p block.inspect
+end
+
+my_method { "block" } # => block; Proc object
+
+my_method               # => nil; nil
+```
+
+However, we can't define a method to expect two explicit blocks:
+
+```ruby
+def my_method(&block1, &block2) # SyntaxError
+end
+```
+
+But we can go around this by passing 2 proc objects
+```ruby
+def my_method(proc1, proc2)
+  proc1.call
+  proc2.call
+end
+
+my_proc1 = Proc.new { puts "hi" }
+my_proc2 = Proc.new { puts "there" }
+
+my_method(my_proc1, my_proc2) # displays "hi" and "there, => nil
+```
+
+And if we pass an explicit block it must be the last parameter passed
+
+```ruby
+def my_method(&block1, par) # SyntaxError
+end
+```
+
+A parameter with an ampersand operator is only suitable for blocks — Proc and lambdas can't be passed through it.
+
+```ruby
+def my_method(&block)
+  yield
+end
+my_proc = Proc.new { puts "hi" }
+my_method(my_proc)        # ArgumentError: wrong number of arguments (given 1, expected 0)
+my_method(my_proc.call)   # ArgumentError: wrong number of arguments (given 1, expected 0)
+my_method { puts "hi" }   # => nil, displays "hi"
+```
+
+### When would we use explicit calls?
+
+1. When we need an object to manipulate the code (rather than a block)
+2. More readability
+
+
+Checks if it's a block
+  - If it is, it turns it into a Proc object
+
+A proc is passed through a parameter — NOT an ampersand parameter — because it's an object and not a Proc

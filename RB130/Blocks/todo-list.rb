@@ -101,10 +101,12 @@ class TodoList
   end
 
   def mark_done_at(index)
+    @todos.fetch(index)
     @todos[index].done!
   end
 
   def mark_undone_at(index)
+    @todos.fetch(index)
     @todos[index].undone!
   end
 
@@ -122,8 +124,9 @@ class TodoList
   end
 
   def to_s
-    puts "---- Today's Todos ----"
-    puts @todos
+    text = "---- #{title} ----\n"
+    text << @todos.map(&:to_s).join("\n")
+    text
   end
 
   def each
@@ -177,124 +180,116 @@ class TodoList
     each { |todo| todo.undone! }
   end
 
+  def ==(other_list)
+    self.to_a == other_list.to_a
+  end
   protected
   attr_accessor :todos
 end
 
 
-# given
-todo1 = Todo.new("Buy milk")
-todo2 = Todo.new("Clean room")
-todo3 = Todo.new("Go to gym")
-list = TodoList.new("Today's Todos")
+# # given
+# todo1 = Todo.new("Buy milk")
+# todo2 = Todo.new("Clean room")
+# todo3 = Todo.new("Go to gym")
+# list = TodoList.new("Today's Todos")
 
-# ---- Adding to the list -----
+# # ---- Adding to the list -----
 
-# add
-p list.add(todo1)                 # adds todo1 to end of list, returns list
-p list
-p list.add(todo2)                 # adds todo2 to end of list, returns list
-p list.add(todo3)                 # adds todo3 to end of list, returns list
-#p list.add(1)                     # raises TypeError with message "Can only add Todo objects"
+# # add
+# p list.add(todo1)                 # adds todo1 to end of list, returns list
+# p list
+# p list.add(todo2)                 # adds todo2 to end of list, returns list
+# p list.add(todo3)                 # adds todo3 to end of list, returns list
+# #p list.add(1)                     # raises TypeError with message "Can only add Todo objects"
 
-# <<
-# same behavior as add
+# # <<
+# # same behavior as add
 
-# ---- Interrogating the list -----
+# # ---- Interrogating the list -----
 
-# size
-p list.size                       # returns 3
+# # size
+# p list.size                       # returns 3
 
-# first
-p list.first                      # returns todo1, which is the first item in the list
+# # first
+# p list.first                      # returns todo1, which is the first item in the list
 
-# last
-p list.last                       # returns todo3, which is the last item in the list
+# # last
+# p list.last                       # returns todo3, which is the last item in the list
 
-#to_a
-p list.to_a                      # returns an array of all items in the list
+# #to_a
+# p list.to_a                      # returns an array of all items in the list
 
-#done?
-p list.done?                     # returns true if all todos in the list are done, otherwise false
+# #done?
+# p list.done?                     # returns true if all todos in the list are done, otherwise false
 
-# ---- Retrieving an item in the list ----
+# # ---- Retrieving an item in the list ----
 
-# item_at
-#list.item_at                    # raises ArgumentError
-p list.item_at(1)                 # returns 2nd item in list (zero based index)
-#list.item_at(100)               # raises IndexError
+# # item_at
+# #list.item_at                    # raises ArgumentError
+# p list.item_at(1)                 # returns 2nd item in list (zero based index)
+# #list.item_at(100)               # raises IndexError
 
-# ---- Marking items in the list -----
+# # ---- Marking items in the list -----
 
-# mark_done_at
-#list.mark_done_at               # raises ArgumentError
-p list.mark_done_at(1)            # marks the 2nd item as done
-p list.item_at(1)
-#list.mark_done_at(100)          # raises IndexError
+# # mark_done_at
+# #list.mark_done_at               # raises ArgumentError
+# p list.mark_done_at(1)            # marks the 2nd item as done
+# p list.item_at(1)
+# #list.mark_done_at(100)          # raises IndexError
 
-# mark_undone_at
-#list.mark_undone_at             # raises ArgumentError
-p list.mark_undone_at(1)          # marks the 2nd item as not done,
-p list.item_at(1)
-#list.mark_undone_at(100)        # raises IndexError
+# # mark_undone_at
+# #list.mark_undone_at             # raises ArgumentError
+# p list.mark_undone_at(1)          # marks the 2nd item as not done,
+# p list.item_at(1)
+# #list.mark_undone_at(100)        # raises IndexError
 
-# done!
-p list.done!                      # marks all items as done
-p list.done?
+# # done!
+# p list.done!                      # marks all items as done
+# p list.done?
 
-# ---- Deleting from the list -----
+# # ---- Deleting from the list -----
 
-# shift
-p list.shift                      # removes and returns the first item in list
+# # shift
+# p list.shift                      # removes and returns the first item in list
 
-# pop
-p list.pop                        # removes and returns the last item in list
+# # pop
+# p list.pop                        # removes and returns the last item in list
 
-p list
+# p list
 
-# remove_at
-#list.remove_at                  # raises ArgumentError
+# # remove_at
+# #list.remove_at                  # raises ArgumentError
 
-#p list.remove_at(0)               # removes and returns the 2nd item
-#list.remove_at(100)             # raises IndexError
+# #p list.remove_at(0)               # removes and returns the 2nd item
+# #list.remove_at(100)             # raises IndexError
 
-# ---- Outputting the list -----
+# # ---- Outputting the list -----
 
-todo1.undone!
-todo2.undone!
-todo3.undone!
+# todo1.undone!
+# todo2.undone!
+# todo3.undone!
 
-list.add(todo1)
-list.add(todo2)
-list.add(todo3)
-#byebug
-# to_s
-list.to_s                      # returns string representation of the list
+# list.add(todo1)
+# list.add(todo2)
+# list.add(todo3)
+# #byebug
+# # to_s
+# list.to_s                      # returns string representation of the list
 
-# ---- Today's Todos ----
-# [ ] Buy milk
-# [ ] Clean room
-# [ ] Go to gym
+# # ---- Today's Todos ----
+# # [ ] Buy milk
+# # [ ] Clean room
+# # [ ] Go to gym
 
-# or, if any todos are done
+# # or, if any todos are done
 
-# ---- Today's Todos ----
-# [ ] Buy milk
-# [X] Clean room
-# [ ] Go to gym
+# # ---- Today's Todos ----
+# # [ ] Buy milk
+# # [X] Clean room
+# # [ ] Go to gym
 
 
-
-todo1 = Todo.new("Buy milk")
-todo2 = Todo.new("Clean room")
-todo3 = Todo.new("Go to gym")
-
-list = TodoList.new("Today's Todos")
-list.add(todo1)
-list.add(todo2)
-list.add(todo3)
-
-puts list.each { |todo| puts todo } # calls Todo#to_s
 
 # todo1 = Todo.new("Buy milk")
 # todo2 = Todo.new("Clean room")
@@ -305,8 +300,19 @@ puts list.each { |todo| puts todo } # calls Todo#to_s
 # list.add(todo2)
 # list.add(todo3)
 
-# todo1.done!
+# puts list.each { |todo| puts todo } # calls Todo#to_s
 
-# results = list.select { |todo| todo.done? }    # you need to implement this method
+# # todo1 = Todo.new("Buy milk")
+# # todo2 = Todo.new("Clean room")
+# # todo3 = Todo.new("Go to gym")
 
-# puts results.inspect
+# # list = TodoList.new("Today's Todos")
+# # list.add(todo1)
+# # list.add(todo2)
+# # list.add(todo3)
+
+# # todo1.done!
+
+# # results = list.select { |todo| todo.done? }    # you need to implement this method
+
+# # puts results.inspect
