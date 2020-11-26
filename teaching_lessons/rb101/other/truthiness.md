@@ -54,7 +54,7 @@ Conditionals can be executed based on the value returned by a method. It all dep
 
 # Logical operators
 
-Operators like || and && return a boolean value. 
+Operators like `||` and `&&` return a boolean value.
 
 ## Logical operations and order precedence
 
@@ -100,4 +100,3 @@ For example
   end
 
 In each of the statements above, we're avoiding the method error of `nil.odd?` of `nil.even?` by short circuiting — the method **stops at num**.
-

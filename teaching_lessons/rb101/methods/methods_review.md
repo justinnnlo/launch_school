@@ -22,7 +22,7 @@ This method takes in a regexp or string pattern and returns an array with string
 If it doesn't match, it returns an empty array.
 
 Default behavior
-```
+```ruby
 "hello".scan("l")
 => ["l", "l"]
 
@@ -37,7 +37,7 @@ Default behavior
 ```
 
 Anomalies
-```
+```ruby
 "hi".scan("")
 => ["", "", ""]
 ```

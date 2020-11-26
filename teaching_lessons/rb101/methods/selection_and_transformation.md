@@ -106,10 +106,10 @@ def double_odd_indices(numbers)
     else
       result << numbers[count]
     end
-  
+
     count += 1
   end
-  
+
   result
 end
 ```

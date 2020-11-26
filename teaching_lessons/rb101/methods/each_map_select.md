@@ -19,7 +19,7 @@ Returns: [1, 3, 5, 7, 9]
 ```ruby
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-new_array = arr.select do |n| 
+new_array = arr.select do |n|
   n + 1
 end
 p new_array
@@ -32,7 +32,7 @@ p new_array thus both outputs and returns `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`.
 ```ruby
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-new_array = arr.select do |n| 
+new_array = arr.select do |n|
   n + 1
   puts n
 end
@@ -67,7 +67,7 @@ Prints: Each element of the array (ie 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 ```ruby
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-incremented = arr.map do |n| 
+incremented = arr.map do |n|
             n + 1
             end
 p incremented
@@ -78,7 +78,7 @@ Prints and returns `[2, 3, 4, 5, 6, 7, 8, 9, 10, 11]`
 ```ruby
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-new_array = arr.map do |n| 
+new_array = arr.map do |n|
   n > 1
 end
 p new_array

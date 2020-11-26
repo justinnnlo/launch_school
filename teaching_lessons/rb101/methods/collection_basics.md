@@ -54,6 +54,9 @@ hsh["fruit"][0] # => "f"
 
 ## Out of bounds slicing
 
+
+Difference between `[]` and `#fetch`
+
 ### Strings and arrays
 
 If you reference an index outside of the boundary of string or array, it returns `nil`. This can be an issue when working with conditionals.

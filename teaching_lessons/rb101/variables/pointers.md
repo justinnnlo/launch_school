@@ -1,7 +1,8 @@
 ```ruby
-a = "hi there" # "hi there"
-b = a          # "hi there"
-a = "not here" # "not here"
+a = "hi there"
+b = a
+a = "not here"
+b
 ```
 
 This example illustrates that variables act as pointers to an object — they're like tags that help us locate and find an object.
@@ -11,9 +12,10 @@ When b is assigned to a, it's really assigned to the variable *pointed* by a —
 When a is reassigned to "not here", as b is pointing to "hi there" and that object isn't mutated, its value doesn't change.
 
 ```ruby
-a = "hi there"
-b = a
-a << ", Bob"
+p a = "hi there"
+p b = a
+p a << ", Bob"
+p b
 ```
 
 This concept shows that when an object is mutated then all variables pointing to it will now return its new value.

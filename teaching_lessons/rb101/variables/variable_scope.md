@@ -24,9 +24,9 @@ Variable scopes differ by the type of variable.
       - Note: blocks passed into methods are the arguments of the method
 
 - Constants and global variables: global/lexical scope can:
-  
+
   1. Be created within an inner scope and accessed outside — unlike local variables
-      
+
           loop do
             TEST = "This is a test!"
             break
@@ -89,7 +89,7 @@ But method definitions have a "self-contained" scope because only the variables 
         test = 10
 
         def my_method(test)
-          test += 1         
+          test += 1
           puts test         # 11
         end
 
@@ -98,7 +98,7 @@ But method definitions have a "self-contained" scope because only the variables 
 
 # Method definition vs method invocation
 
-Method definition is when we create a method (`def...end`). 
+Method definition is when we create a method (`def...end`).
 
 Method invocation is when we call a method. A method can be called on an object or not.
 
@@ -112,9 +112,9 @@ A **method definition creates its own scope** while a **method invocation uses t
 Blocks are used within methods. But there are nuances.
 
 1. Nothing happens if a block is passed to a method that does not expect a block
-          
+
         puts do
-          puts "Hello"  
+          puts "Hello"
         end             => nil
 
 2. When a method defines its interactions with a block, it can be executed

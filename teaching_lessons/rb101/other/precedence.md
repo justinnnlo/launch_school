@@ -11,14 +11,14 @@ When operator precedence is equal the expression is evaluated (i.e. order evalua
 # Order evaluation
 
 What's the output of:
+```ruby
+def value(n)
+  puts n
+  n
+end
 
-  def value(n)
-    puts n
-    n
-  end
-
-  puts value(3) + value(5) * value(7)
-
+puts value(3) + value(5) * value(7)
+```
 More specifically, what's evaluated first: the `value` methods or the `+` operations?
 
 Since a **method invocation** like `value(3)` **is not a value**, the `+` operations can't be executed. This implies that the order evaluation is first for `value` and then for `+`.
@@ -34,7 +34,7 @@ In an arithmetic expression Ruby
 
 ### Right-to-left evaluation
 
-This happens when there are multiple `=` operators (i.e., assignments or modifiers) in an expression. 
+This happens when there are multiple `=` operators (i.e., assignments or modifiers) in an expression.
 
 For example: `puts x if x > 5  if x < 3` or `a = b = c = 3`
 
@@ -45,35 +45,36 @@ Right-to-left evaluations can also happen due to short-circuiting with ternary o
 This explains the difference between these 2 code blocks:
 
 Block #1: without short circuiting
-
-    10 ? 3 / 0 : 1 + 2  # 10 ? evaluates to true and leads to a 0 division error
-    3 / 0 and false     # Zero division error because 3 / 0 comes before `false`
-    false or 3 / 0      # No short circuiting because `false` in || statements don't guarantee the result
-    
+```ruby
+10 ? 3 / 0 : 1 + 2  # 10 ? evaluates to true and leads to a 0 division error
+3 / 0 and false     # Zero division error because 3 / 0 comes before `false`
+false or 3 / 0      # No short circuiting because `false` in || statements don't guarantee the result
+```
 Block #2: with short circuiting
-
-    nil ? 3 / 0 : false # nil leads to false
-    false and 3 / 0     # false in && statements lead to short circuiting
-    true or 3 / 0       # true in || statements lead to short circuiting
-
+```ruby
+nil ? 3 / 0 : false # nil leads to false
+false and 3 / 0     # false in && statements lead to short circuiting
+true or 3 / 0       # true in || statements lead to short circuiting
+```
 ### Blocks and precedence
 
 Blocks have the lowest precedence of all operators. Yet there's a nuance: between `{}` and `do...end`, `{}` has a higher precedence.
 
 Let's see it's implications. What's the difference between:
 
-    array = [1, 2, 3]
-    p array.map do |num|
-      num + 1
-    end
-    => #<Enumerator: [1, 2, 3]:map>
-
+```ruby
+array = [1, 2, 3]
+p array.map do |num|
+  num + 1
+end
+=> #<Enumerator: [1, 2, 3]:map>
+```
 And:
-
-    array = [1, 2, 3]
-    p array.map { |num| num + 1 }
-    => [2, 3, 4]
-
+```ruby
+array = [1, 2, 3]
+p array.map { |num| num + 1 }
+=> [2, 3, 4]
+```
 You'd expect that both blocks would print `[2, 3, 4]`. They both involve i) an array object, ii) that invokes the `map` method and iii) that gets passed a block `num + 1`.
 
 So why does the first block returns `#<Enumerator: [1, 2, 3]:map>` while the second one `[2, 3, 4]`?
@@ -88,30 +89,34 @@ But inversely, a method binds less tightly to its argument than a method call wi
 
 This can be visualized as:
 
-    array = [1, 2, 3]
+```ruby
+array = [1, 2, 3]
 
-    p(array.map) do |num|
-      num + 1                     # <Enumerator: [1, 2, 3]:map>
-    end                           # => <Enumerator: [1, 2, 3]:map>
+p(array.map) do |num|
+  num + 1                     # <Enumerator: [1, 2, 3]:map>
+end                           # => <Enumerator: [1, 2, 3]:map>
 
-    p(array.map { |num| num + 1}) # [2, 3, 4]
-                                  # [2, 3, 4]
+p(array.map { |num| num + 1}) # [2, 3, 4]
+                              # [2, 3, 4]
+```
 
 To correct this default behavior, we can extend p's parentheses to the end of the `do...end` block:
-    array = [1, 2, 3]
+```ruby
+array = [1, 2, 3]
 
-    p(array.map do |num|
-      num + 1                     # [2, 3, 4]
-    end)                          # => [2, 3, 4]
-
+p(array.map do |num|
+  num + 1                     # [2, 3, 4]
+end)                          # => [2, 3, 4]
+```
 ### What happens with the `do...end` block?
 
 But if the first expression is `p array.map`, what happens with its block? As with every method that does not accept a block, `p` **ignores the block**. You can confirm this with:
-
-    p do |num|
-      num + 1
-    end
-    => nil
+```ruby
+p do |num|
+  num + 1
+end
+=> nil
+```
 
 In this code block, `p` lacks its argument.
 

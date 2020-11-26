@@ -42,7 +42,7 @@ Note that **every language and library have different patterns to their stack tr
 # Techniques for Debugging
 
 1. Line by line: read rather than skim
-2. Rubber duck debugging: explain the problem outloud (e.g. to a rubber duck) 
+2. Rubber duck debugging: explain the problem outloud (e.g. to a rubber duck)
   - This stress-tests your understanding
 3. Take a break and come back later
   - Note: doesn't work if you focus on something else, e.g. your phone or a different task

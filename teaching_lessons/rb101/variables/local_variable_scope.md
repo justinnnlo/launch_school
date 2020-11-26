@@ -45,6 +45,7 @@ end
 
 puts a  # 3
 puts b  # 2
+puts c
 ```
 
 This code illustrates the idea of variables as pointers and stress tests it with variable assignments in inner and outer loops. 

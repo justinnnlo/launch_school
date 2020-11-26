@@ -2,14 +2,6 @@
 
 Loops are Ruby constructs that repetitively execute the code within them until the loop is broken. At the end of a loop, if it isn't broken it'll continue execution at the top of the loop. A loop is broken when the condition is met.
 
-## What is the anatomy of a loop?
-
-A loop has 4 components:
-- A way to execute the code repeatedly
-- A way to break the loop
-- Counter
-- A way to retrieve the current value
-
 ## What loop constructs do we have available?
 
 - `loop`
@@ -17,17 +9,6 @@ A loop has 4 components:
 - `while`
 - `until`
 - `for`
-
-### Analyzing the anatomy of looping constructs
-
-```ruby
-x = 0
-
-while x < 1 # Code execution + break
-  x += 1
-  break 5   # Break loop
-end         # => 5
-```
 
 ## Iterators
 Iterators are methods that naturally loop over a given set of data and allow you to operate on each collection element.
@@ -70,22 +51,6 @@ while x > 5
   break x
 end # => 9
 ```
-
-## `next`
-
-`next` tells the loop to skip the current iteration and continue to the next.
-
-```ruby
-x = 0
-
-while x < 1 # Code execution + break
-  x += 1
-  next
-  break 5   # Break loop
-end         # => nil
-```
-Anne Tiotuico, Alfonzo Gonzalez, Antonio Serna, Jesse, Leena
-Why do we get this value?
 
 ## Loops and variable scoping
 

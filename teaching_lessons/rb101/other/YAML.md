@@ -33,7 +33,7 @@ The data structure is automatically set when loaded into Ruby — but always nee
 
     YAML.load([1, 2, 3]).class    # => TypeError, YAML needs inputs within quotes!
     YAML.load("[1, 2, 3]").class  # => Array
-    
+
     YAML.load(hello)              # => NameError: uninitialized constant hello
     YAML.load("hello")            # => "hello"
     YAML.load("I'm 45").class     # => String
@@ -55,7 +55,7 @@ If you try to interpolate a string from YAML into Ruby, you'll probably face som
 
     name = YAML.load_file("test.yml")
     puts "My name is #{name}"
-    
+
 
 ## Newlines in YAML
 
@@ -75,7 +75,7 @@ Note that due to YAML's indentation structure the content of each of these varia
     Each of these
     Newlines
     Will be broken up
-    
+
     version 2: Each of these
     Newlines
     Will be broken up
