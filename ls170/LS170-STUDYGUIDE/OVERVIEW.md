@@ -1,0 +1,3 @@
+The internet is a layered system of communication. Within this system, each layer provides a certain level of functionality or service to the layer above. The Internet Protocol (IP) essentially provides the inter-network communication services necessary for what we might think of as a minimum viable internet.
+
+If we want to create modern networked applications however, there's a number of things that we need beyond what IP can provide. Two of the most important things are **a direct connection between applications**, and **reliable network communication**.

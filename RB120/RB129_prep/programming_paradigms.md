@@ -43,12 +43,16 @@ The key nuance with regards to OOP is that, in contrast with other paradigms lik
 
 En (within) + capsula (small box)
 
-Encapsulation is a type of abstraction wraps the data and functionality for a part of the program in a single construct ("capsule"). Each of these constructs has interfaces through which it interacts. Additionally, we can also define the level of access to the construct
+Encapsulation is a type of abstraction that hides the functionality of a construct from the rest of the code base.
 
-Examples of encapsulation include:
-- Method access control: protected, public, private
-- Getter and setter methods
-- 
+Encapsulation in Ruby OOP works by wrapping in an object construct attributes and behaviours, and defining how the construct interacts with other objects through its interfaces (i.e., methods). Part of encapsulation is defining the level of access for the attributes and behaviours of an object.
+
+Therefore, examples of encapsulation include:
+
+- Class definition, as it implies the encapsulation of attributes and behaviours in a class
+- Object instantiation, as it's the instance that represents the encapsulation of a class
+- Method access control that define how the created functionality can be accessed
+- Method definitions: they're the interface of the object with other objects
 
 ## Inheritance
 
@@ -61,8 +65,6 @@ Inheritance allows us to:
 - Establish heirarchies between classes
 
 ## Modularity
-
-## 
 
 # Defining key concepts
 

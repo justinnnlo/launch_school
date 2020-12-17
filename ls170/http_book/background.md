@@ -58,7 +58,7 @@ For example, if I were to input `http://www.google.com` the process until I see 
   - An HTTP request is some text sent to an IP Address
 3. The device will check in its DNS cache if it has a record of the IP Address
   - If it does, it uses the cached IP Address
-  - Otherwise, a DNS request will be made to the Domain Name System — returning the IP Address
+  - Otherwise, a DNS request (using a Transport layer protocol) will be made to the Domain Name System — returning the IP Address
 4. The packaged up HTTP request goes to the server that matches the IP Address provided
 5. The remote server accepts the request and returns a response that gets sent to your network interface — and through it to your browser
 6. The browser displays the response as a web page

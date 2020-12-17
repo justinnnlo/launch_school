@@ -44,7 +44,7 @@ http://www.phoneshop.com?product=iphone&size=32gb&color=white
     - Parameter values: `iphone`, `32gb` and `white`
   - `&`: reserved keyword marking concatenation of name/value pairs
 
-Query string are only used in HTTP GET requests because they're passed in through the URL. Besides URLs in the address bar, most links also issue HTTP GET requests. Query strings can pas additional information to the server but are limited by:
+Query string are only used in HTTP GET requests because they're passed in through the URL. Besides URLs in the address bar, most links also issue HTTP GET requests. Query strings can pass additional information to the server but are limited by:
 - A maximum length
 - Name/value pairs are visible in the URL — so you shouldn't pass sensitive information like usernames and passwords
 - Spaces and special characters like `&` cannot be used with query strings and must be URL encoded

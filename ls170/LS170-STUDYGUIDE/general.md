@@ -1,0 +1,1 @@
+Network communication is at the heart of how networked applications function. 

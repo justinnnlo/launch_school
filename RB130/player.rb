@@ -9,6 +9,7 @@ def mutate_me(collection, &block)
 end
 
 
-p mutate_me([[1,2], "a"]) do |el| 
+p mutate_me([[1,2], "a"]) do |el|
   el.is_a?(Array) ? el.reverse : el
 end # [[2, 1], [3, 2], [4, 3], "a", "b", "c"]
+
