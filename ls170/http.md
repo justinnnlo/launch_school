@@ -181,7 +181,7 @@ Practice problems
 There are some general characteristic of HTTP methods that help us understand their differences at a high-level:
 - Request has body
 - Successful response has body
-- Safe: can it modify the state/data of the server (i.e. it is a read-only operation)?
+- Safe: it cannot modify the state/data of the server (i.e. it is a read-only operation)?
   - Note: all safe methods are idempotent but not all idempotent methods are safe
 - Idempotent (idem + potent; same + power/influence): calling a method once or several times successively has the same effect
   - Technically: it has no side effect
