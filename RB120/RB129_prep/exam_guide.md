@@ -1,3 +1,14 @@
+1. Encapsulation: objects and classes
+2. Abstraction
+3. Polymorphism
+4. 
+
+Put code (state of objects) into containers (classes and modules as wrappers)
+- Hiding functionality and information from other parts of the program — data protection
+
+- Classes and modules
+
+
 Encapsulation defines the boundaries of what is and is not allowed in your program by defining what functionality is available or unavailable. It's about only allowing minimum amount of information and behaviors needed for the user to accomplish his objective.
 
 The underlying rationale of encapsulation is to reduce the likelihood of the program being used in unwanted ways. These include:
