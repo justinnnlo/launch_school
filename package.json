@@ -1,0 +1,23 @@
+{
+  "name": "launch_school",
+  "version": "1.0.0",
+  "description": "This is my portfolio for the problems I'm working on as part of Launch School.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/14jdelap/launch_school.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/14jdelap/launch_school/issues"
+  },
+  "homepage": "https://github.com/14jdelap/launch_school#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}

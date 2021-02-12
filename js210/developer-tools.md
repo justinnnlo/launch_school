@@ -1,0 +1,2 @@
+- Elements: view HTML code
+- Sources: shows code being run — good for debugging and troubleshooting

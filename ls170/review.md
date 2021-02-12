@@ -224,7 +224,7 @@ TCP enables reliable application-to-application communication. It provides a ser
   - **But which can generate latency through Head-of-Line blocking** and from the overhead of establishing a connection between applications
 - Data recovery by retransmitting lost data
 - Error detection with checksum algorithms
-- Multiplexing and demultiplexing with fourtuples
+**- Multiplexing and demultiplexing with fourtuples**
 - Handling duplication
 
 To compensate for the latency overhead that these services generate, TCP partly compensates through flow control and network congestion mechanisms. Flow control is used by TCP to redirect its segments through the best possible route (note: didn't IP route packets in the most efficient way?) while its network congestion mechanisms are used to reduce the window of segments when data retransmission increases (which signals bandwidth overflow).
