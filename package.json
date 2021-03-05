@@ -19,5 +19,8 @@
   "homepage": "https://github.com/14jdelap/launch_school#readme",
   "dependencies": {
     "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
   }
 }
