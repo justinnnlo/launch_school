@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form method="post" novalidate>
+    <label>Email: <input type="email" name="email"></label>
+    <label>Name: <input type="text" name="name"></label>
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+  <script>
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const json = Object.fromEntries([...new FormData(form)]);
+      const alphabeticalCharacters = /^[a-z \-]+$/i;
+
+      if (!validEmail(json.email)) {
+        alert('Please enter a valid email address');
+      } else if (!alphabeticalCharacters.test(json.name)) {
+        alert('Please enter a name only with alphebetical characters');
+      } else {
+        const request = new XMLHttpRequest();
+        request.open('POST', 'http://localhost:3000/api/staff_members');
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.timeout = 5000;
+        request.send(JSON.stringify(json));
+
+        request.addEventListener('load', event => {
+          const responseData = JSON.parse(request.response);
+          console.log(request)
+          if (request.status >= 400) {
+            alert(request.responseText);
+          } else if (/^2/.test(request.status)) {
+            alert(`Staff with id ${responseData.id} created`);
+          }
+        });
+      }
+
+      form.reset();
+    });
+
+    function validEmail(email) {
+      let [prefix, domain] = email.split('@');
+      if (!prefix || !domain) { return false }
+
+      let domainComponents = domain.split('.');
+      const validCharacters = /^[\w!#$%&'*+-/=?^_`{|}~]+$/;
+
+      return validCharacters.test(prefix) && domainComponents.every(string => validCharacters.test(string)) && domainComponents.length > 1;
+    }
+  </script>
+</body>
+</html>

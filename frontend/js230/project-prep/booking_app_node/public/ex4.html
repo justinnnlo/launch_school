@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./javascripts/ex4.js"></script>
+  <style>
+    form {
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <form method="post" class='schedule_creator' id='1'>
+    <legend>Schedule Entry 1</legend>
+    <label>Staff Name:
+      <select name="staff_id">
+        <option disabled selected>Select a teacher</option>
+      </select>
+    </label>
+    <label>Date: <input type="date" name="date"></label>
+    <label>Time: <input type="time" name="time"></label>
+  </form>
+  <button id="submit">Submit</button>
+  <button id='new_schedule_entry'>Add more Schedules</button>
+  <script>
+    const request = new XMLHttpRequest();
+    request.open('GET', '/api/schedules');
+    request.send();
+    request.addEventListener('load', event => {
+      console.log(request.response);
+    })
+  </script>
+</body>
+</html>

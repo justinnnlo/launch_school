@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./stylesheets/style.css">
+  <script src="./javascripts/handlebars.js"></script>
+  <script src="./javascripts/script.js"></script>
+  <script id="contact_card" type="text/x-handlebars">
+    <li data-id='{{id}}'>
+        <h3 data-name='{{full_name}}'>{{full_name}}</h3>
+        <ul class="inline">
+          <li data-number='{{phone_number}}'>Phone number: {{phone_number}}</li>
+          <li data-email='{{email}}'>Email: {{email}}</li>
+          <li data-tags='{{tags}}'>Skills: {{tags}}</li>
+        </ul>
+        <button class='delete'>Delete Contact</button>
+        <button class='edit'>Edit Contact</button>
+      </li>
+  </script>
+</head>
+<body>
+  <header data-name='header'>
+    <h1 class="logo">Sales Contact Manager</h1>
+    <ul id='quick_actions'>
+      <li><button class="btn_add">Add Contact</button></li>
+      <li class="shift-right"><label>Search by name<input type="search" name="search"></label></li>
+    </ul>
+
+  </header>
+
+  <aside id="no_contacts" class="hidden">
+    <h2>You don't have any contacts...</h2>
+  </aside>
+
+  <section id='display_contacts' class="hidden">
+    <ul>
+    </ul>
+  </section>
+
+  <section id='contact_form' class="hidden">
+    <h2 id="form_headline">Add a contact</h2>
+    <p>All inputs must be entered correctly.</p>
+    <form data-purpose='add'>
+      <fieldset>
+        <label>
+          Name
+          <input type="text" name="full_name" required>
+        </label>
+        <label>
+          Phone number
+          <input type="tel" name="phone_number">
+        </label>
+        <label>
+          Email address
+          <input type="email" name="email">
+        </label>
+      </fieldset>
+      <fieldset>
+        <h3>Skills</h3>
+        <label>
+          <select name="tags">
+            <option disabled selected required>Select</option>
+            <option value="Sales">Sales</option>
+            <option value="IT">IT</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+      </fieldset>
+      <button type="submit">Submit</button>
+      <button type="reset">Clear</button>
+      <a href="#">Return</a>
+    </form>
+  </section>
+  <script src="./javascripts/mvc.js"></script>
+</body>
+</html>

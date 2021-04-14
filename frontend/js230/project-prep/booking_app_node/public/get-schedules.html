@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function getSchedules() {
+      const request = new XMLHttpRequest();
+      request.open('GET', 'http://localhost:3000/api/schedules');
+      request.timeout = 5000;
+      request.responseType = 'json';
+      request.send();
+
+      request.addEventListener('load', event => {
+        const result = {};
+
+        request.response.forEach(obj => {
+          if (result[obj.staff_id]) {
+            result[obj.staff_id] += 1;
+          } else {
+            result[obj.staff_id] = 1;
+          }
+        });
+
+        if (result.length === 0) {
+          alert('There are no available schedules');
+        } else {
+          const resultEntries = Object.entries(result)
+          const message = resultEntries.map(entry => `Staff ${entry[0]}: ${entry[1]}`).join('\n');
+          alert(message);
+        }
+      });
+
+      request.addEventListener('loadend', event => {
+        alert('The request has ended')
+      });
+
+      request.addEventListener('timeout', () => {
+        alert('The request is taking longer than expected, try again later.')
+      })
+    }
+
+    getSchedules();
+  </script>
+</body>
+</html>

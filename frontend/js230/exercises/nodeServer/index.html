@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Node Swap</title>
+  </head>
+  <body>
+    <form action="/" method="POST">
+      <label>
+        First name
+        <input type="text" name="first-name" required>
+      </label>
+
+      <label>
+        Last name
+        <input type="text" name="last-name" required>
+      </label>
+
+      <label>
+        Email address
+        <input type="email" name="email" required>
+      </label>
+
+      <label>
+        Phone number
+        <input type="tel" name="phone-number" required>
+      </label>
+
+      <input type="submit" value="Submit">
+    </form>
+    <script>
+      document.querySelector('form').onsubmit = function(e) {
+        e.preventDefault()
+        document.body.innerText = e.target;
+      }
+    </script>
+  </body>
+</html>

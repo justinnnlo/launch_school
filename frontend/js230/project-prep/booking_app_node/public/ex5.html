@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/javascripts/ex5.js"></script>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Schedules</h1>
+    <form action="post" id='submit-schedule'>
+      <label>
+        Please select one schedule
+        <select name="id">
+          <option disbaled selected>Loading...</option>
+        </select>
+      </label>
+      <label>
+        Email:
+        <input type="email" name="email">
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+  <section id="create-student" class='hidden'>
+    <h1>Please provide new student details</h1>
+    <form method="post">
+      <!-- Email should be placed automatically based on input above -->
+      <label>
+        Email:
+        <input type="email" name="email">
+      </label>
+      <label>
+        Name:
+        <input type="text" name="name">
+      </label>
+      <!-- Booking sequence should be placed automatically based on ¿value returned?-->
+      <label>
+        Booking sequence:
+        <input type="number" name="booking_sequence">
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+</body>
+</html>
